@@ -1,0 +1,246 @@
+\begin{center}
+\thispagestyle{empty}
+%\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{cover.png}
+\begin{tikzpicture}[remember picture, overlay, inner sep=0pt]
+\node at (current page.center)
+{\includegraphics[width=\paperwidth, keepaspectratio=false]{cover.png}};
+\end{tikzpicture}
+\newpage
+\thispagestyle{empty}
+\huge
+\textbf{C++23 最佳实践}
+\\[9pt]
+\normalsize
+编写优质 C++ 的规则与具体方式
+\\[9pt]
+\normalsize
+作者: Jason Turner
+\\[8pt]
+\normalsize
+译者：\href{https://github.com/xiaoweiChen/Cpp-Memory-Management}{陈晓伟}
+\\[8pt]
+\end{center}
+
+\newpage
+
+\begin{comment}
+\end{comment}
+
+\pagestyle{empty}
+\tableofcontents
+\newpage
+
+\setsecnumdepth{section}
+
+\myPartGray{第一部分}{引言与优秀 C++ 的理念}{content/part1/part.tex}
+\newpage
+
+\myChapter{1}{C++23 版本导论}{content/part1/1.tex}
+\newpage
+
+\myChapter{2}{原始版本导论}{content/part1/2.tex}
+\newpage
+
+\myChapter{3}{关于最佳实践}{content/part1/3.tex}
+\newpage
+
+\myChapter{4}{放慢脚步}{content/part1/4.tex}
+\newpage
+
+\myChapter{5}{明智地使用 AI 编程助手}{content/part1/5.tex}
+\newpage
+
+\myChapter{6}{C++ 并非魔法}{content/part1/6.tex}
+\newpage
+
+\myChapter{7}{请记住：C++ 并非面向对象}{content/part1/7.tex}
+\newpage
+
+\myChapter{8}{学习另一种语言}{content/part1/8.tex}
+\newpage
+
+\myChapter{9}{熟悉标准库}{content/part1/9.tex}
+\newpage
+
+\myChapter{10}{善用工具}{content/part1/10.tex}
+\newpage
+
+\myChapter{11}{不要引发未定义行为}{content/part1/11.tex}
+\newpage
+
+\myChapter{12}{未定义行为：不要测试 this 是否为 nullptr}{content/part1/12.tex}
+\newpage
+
+\myChapter{13}{未定义行为：不要测试引用是否为 nullptr}{content/part1/13.tex}
+\newpage
+
+\myPartGray{第二部分}{善用工具}{content/part2/part.tex}
+\newpage
+
+\myChapter{14}{自动化测试}{content/part2/14.tex}
+\newpage
+
+\myChapter{15}{持续构建}{content/part2/15.tex}
+\newpage
+
+\myChapter{16}{编译器警告}{content/part2/16.tex}
+\newpage
+
+\myChapter{17}{静态分析}{content/part2/17.tex}
+\newpage
+
+\myChapter{18}{考虑自定义静态分析}{content/part2/18.tex}
+\newpage
+
+\myChapter{19}{Sanitizers（检测工具）}{content/part2/19.tex}
+\newpage
+
+\myChapter{20}{代码加固}{content/part2/20.tex}
+\newpage
+
+\myChapter{21}{使用多个编译器}{content/part2/21.tex}
+\newpage
+
+\myChapter{22}{模糊测试与变异测试}{content/part2/22.tex}
+\newpage
+
+\myChapter{23}{构建生成器}{content/part2/23.tex}
+\newpage
+
+\myChapter{24}{包管理器}{content/part2/24.tex}
+\newpage
+
+\myPartGray{第三部分}{API 与代码设计准则}{content/part3/part.tex}
+\newpage
+
+\myChapter{25}{让接口难以误用}{content/part3/25.tex}
+\newpage
+
+\myChapter{26}{考虑 API 错误使用是否会引发未定义行为}{content/part3/26.tex}
+\newpage
+
+\myChapter{27}{警惕全局状态}{content/part3/27.tex}
+\newpage
+
+\myChapter{28}{使用更强的类型}{content/part3/28.tex}
+\newpage
+
+\myChapter{29}{使用 [[nodiscard]]}{content/part3/29.tex}
+\newpage
+
+\myChapter{30}{忘记头文件}{content/part3/30.tex}
+\newpage
+
+\myChapter{31}{保持导出模块重载的一致性}{content/part3/31.tex}
+\newpage
+
+\myChapter{32}{优先使用栈而非堆}{content/part3/32.tex}
+\newpage
+
+\myChapter{33}{不要返回原始指针}{content/part3/33.tex}
+\newpage
+
+\myChapter{34}{了解容器}{content/part3/34.tex}
+\newpage
+
+\myChapter{35}{关注自定义分配与 PMR}{content/part3/35.tex}
+\newpage
+
+\myChapter{36}{使用 Concepts 约束模板参数}{content/part3/36.tex}
+\newpage
+
+\myChapter{37}{理解 consteval 和 constinit}{content/part3/37.tex}
+\newpage
+
+\myChapter{38}{优先使用太空船运算符（<=>）}{content/part3/38.tex}
+\newpage
+
+\myChapter{39}{遵循“零规则”}{content/part3/39.tex}
+\newpage
+
+\myChapter{40}{若必须手动管理资源，请遵循“五规则”}{content/part3/40.tex}
+\newpage
+
+\myPartGray{第四部分}{代码实现准则}{content/part4/part.tex}
+\newpage
+
+\myChapter{41}{不要复制粘贴代码}{content/part4/41.tex}
+\newpage
+
+\myChapter{42}{优先使用 format 而非 iostream 或 C 风格格式化函数}{content/part4/42.tex}
+\newpage
+
+\myChapter{43}{尽可能使用 constexpr}{content/part4/43.tex}
+\newpage
+
+\myChapter{44}{将头文件中的全局变量声明为 inline constexpr}{content/part4/44.tex}
+\newpage
+
+\myChapter{45}{对非 constexpr 变量也尽可能使用 const}{content/part4/45.tex}
+\newpage
+
+\myChapter{46}{始终初始化非 const、非 auto 的值}{content/part4/46.tex}
+\newpage
+
+\myChapter{47}{优先使用 auto}{content/part4/47.tex}
+\newpage
+
+\myChapter{48}{使用 Range 和 View 提高正确性和可读性}{content/part4/48.tex}
+\newpage
+
+\myChapter{49}{不要重复使用 View}{content/part4/49.tex}
+\newpage
+
+\myChapter{50}{优先使用算法而非循环}{content/part4/50.tex}
+\newpage
+
+\myChapter{51}{当 View 和算法无法解决问题时，再使用范围 for 循环}{content/part4/51.tex}
+\newpage
+
+\myChapter{52}{范围 for 循环中使用 auto}{content/part4/52.tex}
+\newpage
+
+\myChapter{53}{避免在 switch 语句中使用 default}{content/part4/53.tex}
+\newpage
+
+\myChapter{54}{优先使用作用域枚举（scoped enums）}{content/part4/54.tex}
+\newpage
+
+\myChapter{55}{优先使用 if constexpr 而非 SFINAE}{content/part4/55.tex}
+\newpage
+
+\myChapter{56}{将泛型代码去模板化}{content/part4/56.tex}
+\newpage
+
+\myChapter{57}{使用 Lippincott 函数}{content/part4/57.tex}
+\newpage
+
+\myChapter{58}{不再使用 new！}{content/part4/58.tex}
+\newpage
+
+\myChapter{59}{避免使用 std::bind 和 std::function}{content/part4/59.tex}
+\newpage
+
+\myChapter{60}{不要对非普通类型使用 initializer\_list}{content/part4/60.tex}
+\newpage
+
+\myChapter{61}{使用指定初始化器（C++20）}{content/part4/61.tex}
+\newpage
+
+\myPartGray{第五部分}{附加章节}{content/part5/part.tex}
+\newpage
+
+\myChapter{62}{优化构建时间}{content/part5/62.tex}
+\newpage
+
+\myChapter{63}{持续提升 C++ 水平}{content/part5/63.tex}
+\newpage
+
+\myChapter{64}{深入理解 Lambda}{content/part5/64.tex}
+\newpage
+
+\myChapter{65}{致谢}{content/part5/65.tex}
+\newpage
+
+\begin{comment}
+\end{comment}
