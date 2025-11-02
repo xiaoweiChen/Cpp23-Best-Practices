@@ -1,0 +1,93 @@
+范围视图（Range views）可能会以意想不到的方式保存状态，从而导致代码产生出人意料的求值结果。
+
+\filename{图 86. 重复使用 drop 视图，带有缓存效应}
+\begin{cpp}
+import std;
+
+int main()
+{
+  std::list<int> values{1,2,3,4,5,6,7,8,9};
+
+  auto drop_2 = values | std::views::drop(2);
+
+  std::println("{}", drop_2);
+
+  values.erase(values.begin());
+
+  std::println("{}", drop_2);
+}
+\end{cpp}
+
+你可能会惊讶地发现，上面的代码输出为：
+
+\filename{图 87. 重复使用 drop 视图的输出，使用 list。}
+\begin{shell}
+> 3, 4, 5, 6, 7, 8, 9
+> 3, 4, 5, 6, 7, 8, 9
+\end{shell}
+
+然而，如果我们把代码改为使用 std::vector，则会得到预期的输出。
+
+\filename{图 88. 重复使用 drop 视图，没有缓存效应}
+\begin{cpp}
+import std;
+
+int main()
+{
+  std::vector<int> values{1,2,3,4,5,6,7,8,9};
+
+  auto drop_2 = values | std::views::drop(2);
+
+  std::println("{}", drop_2);
+
+  values.erase(values.begin());
+
+  std::println("{}", drop_2);
+}
+\end{cpp}
+
+\filename{图 89. 重复使用 drop 视图的输出，使用 vector。}
+\begin{shell}
+> 3, 4, 5, 6, 7, 8, 9
+> 4, 5, 6, 7, 8, 9
+\end{shell}
+
+\begin{myNotic}{}
+有些人会因为这类问题而建议你完全避免使用视图。
+\end{myNotic}
+
+我们将采取一个更为审慎的方法。
+
+\begin{myWarning}{}
+不要重复使用视图！
+\end{myWarning}
+
+解决此问题的一个相对简单的方案是：
+
+\filename{图 90. 使用 lambda 表达式来创建视图。}
+\begin{cpp}
+import std;
+
+int main()
+{
+  std::list<int> values{1,2,3,4,5,6,7,8,9};
+
+  auto drop_2 = []{ return values | std::views::drop(2); };
+
+  std::println("{}", drop_2());
+
+  values.erase(values.begin());
+
+  std::println("{}", drop_2());
+}
+\end{cpp}
+
+\mySubsectionNoFile{49.1}{资源}
+
+\begin{itemize}
+\item
+Denver C++ Meetup: 2023-04 - TylerWeaver - 阅读Ranges（不要只听我说的）\footnote{\url{https://youtu.be/H-CMApmuBoQ}}
+
+\item
+C++ Ranges 的优美视图、细节与陷阱 - Nico Josuttis - Meeting C++ 2022 大会主题演讲\footnote{\url{https://youtu.be/O8HndvYNvQ4}}
+\end{itemize}

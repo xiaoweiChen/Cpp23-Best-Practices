@@ -1,0 +1,86 @@
+理想情况下，应将所有变量声明为 const，这会强制你进行初始化。然而，这并不总是可行的。
+同样地，如果你使用 auto，也会强制你对对象进行初始化。
+
+\begin{itemize}
+\item
+编译器会“丢弃”对未初始化值的操作
+
+\item
+确保启用了类似 -Wuninitialized 的编译器警告
+\end{itemize}
+
+\begin{myNotic}
+请注意，在某些情况下，默认初始化与看似“空”的初始化之间可能存在差异。
+\end{myNotic}
+
+编译器并不总能完美地捕捉到未初始化值的使用。例如，截至 2023 年 12 月 30 日，GCC 需要启用优化才能检测到此类未初始化的变量访问，而这种行为属于未定义行为（UB）。
+
+\filename{图 65. GCC 在未启用优化时无法捕获的未初始化变量读取}
+\begin{cpp}
+#include <span>
+
+float sum(std::span<float> values)
+{
+  float result;
+
+  for (const auto f : values) {
+    result += f;
+  }
+
+  return result;
+}
+\end{cpp}
+
+\begin{myTip}{练习：理解你调用的是哪个构造函数}
+请使用下面的示例代码，在 compilerexplorer.com 上以不同的优化级别运行，以理解不同构造函数调用可能产生的差异。
+
+\filename{图 66. 调用的是哪个构造函数？}
+\begin{cpp}
+import std;
+
+int main()
+{
+  // std::string 不是平凡可构造的，因此这会调用
+  // 默认构造函数，并被初始化为空字符串 ""
+  std::string str;
+
+  // 显式调用默认构造函数
+  std::string str2{};
+
+  // 调用接受 const char * 参数的构造函数
+  // 尝试在不同优化级别下注释掉这行代码进行测试
+  std::string str3 = "";
+}
+\end{cpp}
+\end{myTip}
+
+\begin{myTip}{练习}
+确保 -Wuninitialized 警告没有被禁用，并认真对待这些警告。
+\end{myTip}
+
+\mySubsectionNoFile{46.1}{工具}
+
+\begin{itemize}
+\item
+Valgrind 的 Memcheck\footnote{\url{https://www.valgrind.org/info/tools.html\#memcheck}}
+
+\item
+Dr Memory\footnote{\url{https://dynamorio.org/drmemory_docs/page_uninit.html}}
+\end{itemize}
+
+\mySubsectionNoFile{46.2}{资源}
+
+\begin{itemize}
+\item
+C++ Weekly - 第 257 集 - 垃圾进，垃圾出 - 为什么初始化至关重要\footnote{\url{https://youtu.be/uYN6-YQPsGo}}
+
+\item
+COVID-19 研究与未初始化变量\footnote{\url{https://www.viva64.com/en/b/0796/}}
+
+\item
+在 Windows 中模糊测试图像解析，第二部分：未初始化的内存\footnote{\url{https://www.fireeye.com/blog/threat-research/2021/03/fuzzing-image-parsing-in-windows-uninitializedmemory.html}}
+\end{itemize}
+
+
+
+

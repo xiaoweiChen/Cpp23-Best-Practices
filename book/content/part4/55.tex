@@ -1,0 +1,148 @@
+SFINAE 有点像“只写”代码。if constexpr 没有 SFINAE 那么灵活，但在能用的时候请使用它。
+让我们回顾一下在“在多种情况下优先使用 auto”一节中见过的 divide 例子：
+
+\filename{图 106. C++14 的 divide 模板。}
+\begin{cpp}
+template<typename Numerator, typename Denominator>
+auto divide(Numerator numerator, Denominator denominator)
+{
+  return numerator / denominator;
+}
+\end{cpp}
+
+现在，我们希望在进行整数除法时添加不同的行为。在 C++17 之前，我们会使用 SFINAE（“替换失败并非错误”）。这本质上意味着，如果一个函数的实例化失败，它就会从重载决议中被移除。
+
+\filename{图 107. 使用 SFINAE 的 'divide' 函数。}
+\begin{cpp}
+#include <stdexcept>
+#include <type_traits>
+#include <utility>
+
+template <typename Numerator, typename Denominator,
+          std::enable_if_t<std::is_integral_v<Numerator> &&
+                           std::is_integral_v<Denominator>,
+                           int> = 0>
+auto divide(Numerator numerator, Denominator denominator) {
+  // 整数除法
+  if (denominator == 0) {
+    throw std::runtime_error("divide by 0!");
+  }
+  return numerator / denominator;
+}
+
+template <typename Numerator, typename Denominator,
+          std::enable_if_t<std::is_floating_point_v<Numerator> ||
+                           std::is_floating_point_v<Denominator>,
+                           int> = 0>
+auto divide(Numerator numerator, Denominator denominator) {
+  // 浮点数除法
+  return numerator / denominator;
+}
+\end{cpp}
+
+C++17 中的 if constexpr 可以简化这段代码：
+
+\filename{图 108. 使用 'if constexpr' 在编译时改变行为的选项。}
+\begin{cpp}
+import std;
+
+// 注意，我们可以对 numerator 和 denominator 使用 auto
+// 但这实际上会通过要求我们使用 decltype 来重新获取类型信息
+// 从而使 if constexpr 代码变得复杂。
+template <typename Numerator, typename Denominator>
+[[nodiscard]] constexpr auto divide(Numerator numerator, Denominator de\
+nominator) {
+  if constexpr (std::is_integral_v<Numerator> &&
+                std::is_integral_v<Denominator>) {
+    // 整数除法
+    if (denominator == 0) {
+      throw std::runtime_error("divide by 0!");
+    }
+  }
+
+  return numerator / denominator;
+}
+\end{cpp}
+
+\begin{myTip}{}
+在很多情况下，为了提高可读性，请考虑使用 concepts 而不是 if constexpr。
+\end{myTip}
+
+\filename{图 109. 使用约束而不是 'if constexpr'}
+\begin{cpp}
+import std;
+
+// 默认选择的重载
+[[nodiscard]] constexpr auto divide(auto numerator, auto denominator) {
+  return numerator / denominator;
+}
+
+// 仅当两个参数都是整数类型时才会调用此版本
+[[nodiscard]] constexpr auto divide(
+  std::integral auto numerator, std::integral auto denominator) {
+
+  // 整数除法
+  if (denominator == 0) {
+  throw std::runtime_error("divide by 0!");
+  }
+
+  return numerator / denominator;
+}
+\end{cpp}
+
+\begin{myNotic}{}
+if constexpr 块内的代码在语法上仍然必须是正确的。if constexpr 与 \#define 不同。
+\end{myNotic}
+
+\begin{myTip}{}
+你通常可能会选择放在 if 块外部的代码，现在可能需要放在 else 块内部，以确保它不会用无效的类型进行实例化。
+\end{myTip}
+
+\begin{myTip}{练习：研究“内省式设计”（design by introspection）}
+if constexpr、concepts 和 requires 的结合产生了一种非常强大的、几乎类似反射的能力。
+
+\filename{图 110. “内省式设计”示例}
+\begin{cpp}
+constexpr void add_values(auto &container, auto first, auto second)
+{
+  // 我们在编译时询问，这个容器
+  // 是否具有 reserve 和 size 成员。
+  if constexpr(requires {container.reserve(container.size() + 2); }) {
+    // 如果这是一个有效的操作，则在运行时执行它
+    container.reserve(container.size() + 2);
+  }
+
+  // either way, add the values
+  container.push_back(first);
+  container.push_back(second);
+}
+\end{cpp}
+\end{myTip}
+
+\begin{shell}
+该技术最早由 Andrei Alexandrescu 于 2001 年提出，后由 Kris Jusiak 引入到 C++20 中。
+\end{shell}
+
+\mySubsectionNoFile{55.1}{资源}
+
+\begin{itemize}
+\item
+C++ Weekly 特别版：使用 C++17 的 constexpr if\footnote{\url{https://youtu.be/_Ny6Qbm_uMI}}
+\item
+C++ Weekly - 第 122 集 - 与 optional 和 variant 一起使用 constexpr\footnote{\url{https://youtu.be/2eCV_udkP_o}}
+
+\item
+CppCon 2017: Jason Turner “实用的 C++17”\footnote{\url{https://youtu.be/nnY4e4faNp0}}
+
+\item
+C++ Weekly - 第 242 集 - C++20 中的内省式设计\footnote{\url{https://youtu.be/sy32kAtsIKg}}
+
+\item
+Tony Tables 中的 C++17: constexpr if\footnote{\url{https://github.com/tvaneerd/cpp17_in_TTs/blob/master/if_constexpr.md}}
+\end{itemize}
+
+
+
+
+
+

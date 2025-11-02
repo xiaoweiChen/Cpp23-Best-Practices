@@ -1,0 +1,183 @@
+我不是“几乎总是使用 auto”的拥护者，但让我问你一个问题：std::count 的返回类型是什么？
+我的回答是：“我不关心。”
+
+\filename{图 67. ‘const auto‘}
+\begin{cpp}
+const auto result = std::count( /* stuff */ );
+\end{cpp}
+
+或者，如果你更喜欢：
+
+\filename{图 68. ‘auto const‘}
+\begin{cpp}
+auto const result = std::count( /* stuff */ );
+\end{cpp}
+
+\begin{myTip}{}
+使用 auto 可以避免不必要的转换和数据丢失。这与范围 for 循环（ranged-for loops）的道理相同。auto 要求必须进行初始化，这一点和 const 一样，其背后的原因也相同。
+\end{myTip}
+
+\filename{图 69. auto 要求初始化}
+\begin{cpp}
+auto i; // 无法编译
+auto i = int; // 无法编译
+\end{cpp}
+
+示例：
+
+\filename{图 70. 可能产生昂贵的转换。}
+\begin{cpp}
+const std::string value = get_string_value();
+\end{cpp}
+
+get\_string\_value() 的返回类型是什么？如果它是 std::string\_view 或 const char *，那么在所有编译器上都会产生一次潜在的、代价高昂的转换，且不会有任何诊断提示。
+
+\filename{图 71. 不会产生昂贵的转换。}
+\begin{cpp}
+// 避免了转换
+const auto value = get_string_value();
+\end{cpp}
+
+此外，auto 返回类型实际上可以显著简化泛型代码。
+
+\filename{图 72. C++ 98 模板用法。}
+\begin{cpp}
+// 我们之前“不要害怕模板”中的例子
+template<typename Arithmetic>
+Arithmetic divide(Arithmetic numerator, Arithmetic denominator) {
+  return numerator / denominator;
+}
+\end{cpp}
+
+这段代码强制我们对分子和分母使用相同的类型（你可以试试看，会得到一些奇怪的编译错误）。
+
+\filename{图 73. 让 C++ 98 模板变得更泛化？}
+\begin{cpp}
+template<typename Numerator, typename Denominator>
+/*返回类型是什么？*/
+divide(Numerator numerator, Denominator denominator) {
+  return numerator / denominator;
+}
+\end{cpp}
+
+C++98 无法解决这个问题，但 C++11 可以。
+
+\filename{图 74. C++11 尾随返回类型。}
+\begin{cpp}
+// 使用尾随返回类型
+template<typename Numerator, typename Denominator>
+auto divide(Numerator numerator, Denominator denominator)
+  -> decltype(numerator / denominator)
+{
+  return numerator / denominator;
+}
+\end{cpp}
+
+但在 C++14 中，我们可以完全省略返回类型（记住，跳过 C++11）。
+
+\filename{图 75. C++14 的 ‘auto‘ 返回类型。}
+\begin{cpp}
+template<typename Numerator, typename Denominator>
+auto divide(Numerator numerator, Denominator denominator)
+{
+  return numerator / denominator;
+}
+\end{cpp}
+
+在 C++20 中，我们可以使用 auto 函数参数进一步简化这段代码（这会为我们创建隐式模板）
+
+\filename{图 76. C++20 的 ‘auto‘ 参数。}
+\begin{cpp}
+auto divide(auto numerator, auto denominator)
+{
+  return numerator / denominator;
+}
+\end{cpp}
+
+如果对你的应用有意义，可以考虑约束这些参数
+
+\filename{图 77. 受约束的 auto 参数。}
+\begin{cpp}
+// this should also be constexpr and [[nodiscard]]
+std::floating_point auto divide(
+std::floating_point auto numerator, std::floating_point auto denominator)
+{
+  return numerator / denominator;
+}
+\end{cpp}
+
+\begin{myTip}{练习：熟悉 auto 的类型推导。}
+\filename{图 78. 例1: val 的类型是什么？}
+\begin{cpp}
+const int *get();
+
+int main() {
+  const auto val = get();
+}
+\end{cpp}
+
+\filename{图 79. 例2: val 的类型是什么？}
+\begin{cpp}
+const int &get();
+
+int main() {
+  const auto val = get();
+}
+\end{cpp}
+
+\filename{图 80. 例3: val 的类型是什么？}
+\begin{cpp}
+const int *get();
+
+int main() {
+  const auto *val = get();
+}
+\end{cpp}
+
+\filename{图 81. 例4: val 的类型是什么？}
+\begin{cpp}
+const int &get();
+
+int main() {
+  const auto &val = get();
+}
+\end{cpp}
+
+\filename{图 82. 例5: val 的类型是什么？}
+\begin{cpp}
+const int *get();
+
+int main() {
+  const auto &val = get();
+}
+\end{cpp}
+
+\filename{图 83. 例6: val 的类型是什么？}
+\begin{cpp}
+const int &get();
+
+int main() {
+  const auto &&val = get();
+}
+\end{cpp}
+
+\end{myTip}
+
+\begin{myTip}{练习：建立你的实验库}
+上面的练习非常适合整理成一系列实验，并保存在你 GitHub 的代码片段（gists）中，正如《C++ 并非魔法》一书中所提到的那样。
+\end{myTip}
+
+\begin{myTip}{练习：理解 auto 和模板推导的关系}
+理解模板的类型推导规则，以及它与 auto 的关系。阅读 C++ 编程语言标准中的 [dcl.spec.auto] 章节。
+\end{myTip}
+
+\mySubsectionNoFile{47.1}{资源}
+
+\begin{itemize}
+\item
+clang-tidy modernize-use-auto\footnote{\url{https://clang.llvm.org/extra/clang-tidy/checks/modernize-use-auto.html}}
+
+\item
+“几乎总是使用 auto”（AAA，Almost Always Auto)\footnote{\url{https://herbsutter.com/2013/08/12/gotw-94-solution-aaa-style-almost-always-auto/}}
+\end{itemize}
+

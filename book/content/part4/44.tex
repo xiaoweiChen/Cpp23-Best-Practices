@@ -6,11 +6,11 @@
 忘记头文件的存在吧！
 \end{enumerate}
 
-\begin{myTip}
+\begin{myTip}{}
 所有全局数据都应该是 constexpr
 \end{myTip}
 
-但全局的 constexpr 值是完全安全的。它们无法被修改，也不会造成“超距作用”（spooky action at a distance）。
+但全局的 constexpr 值是完全安全的。它们无法被修改，也不会造成“超距作用”。
 
 如果你仍然在使用头文件，因为你还没有完全迁移到模块……
 

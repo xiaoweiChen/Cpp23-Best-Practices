@@ -1,0 +1,81 @@
+C++11 引入了作用域枚举（scoped enumerations），旨在解决从 C 语言继承而来的 enum 的许多常见问题。
+
+\filename{图 104. C++98 的 'enum'}
+\begin{cpp}
+enum Choices {
+  option1 // 值位于全局作用域
+};
+
+enum OtherChoices {
+  option2
+};
+
+int main() {
+  int val = option1;
+  val = option2; // 没有警告
+}
+\end{cpp}
+
+\begin{itemize}
+\item
+\verb|enum Choices;|
+
+\item
+\verb|enum OtherChoices;|
+\end{itemize}
+
+这两个枚举很容易混淆，并且它们各自都会在全局命名空间中引入标识符。
+
+\begin{itemize}
+\item
+\verb|enum class Choices;|
+
+\item
+\verb|enum class OtherChoices;|
+\end{itemize}
+
+这些枚举中的值是受作用域限制的，并且类型更严格。
+
+\filename{图 105. C++11 作用域枚举。}
+\begin{cpp}
+enum class Choices {
+  option1
+};
+
+enum class OtherChoices {
+  option2
+};
+
+int main() {
+  int val = option1; // 无法编译，需要作用域限定
+  int val2 = Choices::option1; // 无法编译，类型错误
+  Choices val = Choices::option1; // 可以编译
+  val = OtherChoices::option2; // 无法编译，类型错误
+}
+\end{cpp}
+
+这些 enum class 版本的枚举在没有刻意为之的情况下很难混淆，并且它们的标识符现在是受作用域限制的，不再是全局的。
+
+\begin{shell}
+enum struct 和 enum class 是等价的。从逻辑上讲，enum struct 更合理，因为它们的名称是公开的。你更喜欢哪一个？
+\end{shell}
+
+\begin{myTip}{练习：enum struct 还是 enum class}
+决定你更喜欢 enum struct 还是 enum class，并给出一个经过深思熟虑的理由。
+\end{myTip}
+
+\begin{myWarning}{}
+迁移到作用域枚举可能会发现你代码中的许多 bug！
+\end{myWarning}
+
+\mySubsectionNoFile{54.1}{资源}
+
+\begin{itemize}
+\item
+CppCon 2018: Victor Ciura “你 Clang 工具箱中的更好工具”\footnote{\url{https://youtu.be/4X_fZkl7kkU}} (讨论了迁移到 enum class 时发现的 bug)
+
+\item
+cppreference.com 枚举声明\footnote{\url{https://en.cppreference.com/w/cpp/language/enum}}
+\end{itemize}
+
+

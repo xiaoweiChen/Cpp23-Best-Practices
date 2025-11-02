@@ -1,0 +1,79 @@
+不使用 auto 可能会使代码中更容易出现无声的错误。
+
+\filename{图 96. 意外的转换}
+\begin{cpp}
+for (const int value : container_of_double) {
+  // 意外的转换，可能会有警告
+}
+\end{cpp}
+
+\filename{图 97. 意外的对象切片}
+\begin{cpp}
+for (const base value : container_of_derived) {
+  // 意外的、无声的对象切片（slicing）
+}
+\end{cpp}
+
+\filename{图 98. 没有问题}
+\begin{cpp}
+for (const auto &value : container) {
+  // 不可能发生意外的转换
+}
+\end{cpp}
+
+优先使用：
+
+\begin{itemize}
+\item
+\verb|const auto &| 用于不修改元素的循环
+
+\item
+\verb|auto &| 用于需要修改元素的循环
+
+\item
+\verb|auto &&| 仅在必须处理像 std::vector<bool> 这样的特殊类型，或需要将元素从容器中移出时使用
+\end{itemize}
+
+\begin{myTip}{练习：理解 std::map 和范围 for 循环}
+理解下面这段代码在做什么。它是否在进行拷贝？为什么？如何发生的？
+
+\filename{图 99. 意外的拷贝？}
+\begin{cpp}
+std::map<std::string, int> get_map();
+
+using element_type = std::pair<std::string, int>;
+
+for (const element_type & : get_map())
+{
+}
+\end{cpp}
+\end{myTip}
+
+\begin{myTip}{}
+现代编译器可以直接捕获上述问题，但你必须启用相应的警告才能看到它！
+\end{myTip}
+
+\begin{myTip}{练习：启用与范围循环相关的警告}
+确保在你的代码中启用了 -Wrange-loop-construct 警告，该警告会自动包含在 -Wall 中。
+\end{myTip}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,63 @@
+算法能够传达意图，并帮助我们践行“尽可能使用 const”（const All The Things）的原则。在 C++20 中，我们拥有了 ranges，这让算法的使用变得更加便捷。通过采用函数式编程的思路并使用算法，我们甚至可以写出读起来像自然语言句子一样的 C++ 代码。
+
+\filename{图 91. 使用 ranges 的算法}
+\begin{cpp}
+const auto has_value
+  = std::any_of(container, greater_than(12));
+\end{cpp}
+
+\filename{图 92. 使用显式迭代器的算法}
+\begin{cpp}
+const auto has_value
+  = std::any_of(begin(container), end(container),
+                greater_than(12));
+\end{cpp}
+
+注意，在一些罕见情况下\footnote{\url{https://sourceforge.net/p/cppcheck/wiki/ListOfChecks/}}，你的静态分析工具可能会建议你使用某个特定的算法。
+
+\begin{myTip}{练习：研究现有的循环}
+下次当你在代码库中阅读一个循环时，将其与 C++ 的 <algorithm> 头文件\footnote{\url{https://en.cppreference.com/w/cpp/algorithm}} 进行对照，尝试找出是否有更合适的算法可以替代它。
+\end{myTip}
+
+\begin{myNotic}{}
+本书只是简单提及了 C++20 的 ranges。在本书出版时，编译器才刚刚开始支持 ranges。ranges 可以组合使用，并且完全支持 constexpr。
+\end{myNotic}
+
+\mySubsectionNoFile{50.1}{资源}
+
+\begin{itemize}
+\item
+GoingNative 2013: Sean Parent “C++ 调味”\footnote{\url{https://channel9.msdn.com/Events/GoingNative/2013/Cpp-Seasoning}}
+
+\item
+CppCon 2018: Jonathan Boccara “一小时内掌握 105 个算法”\footnote{\url{https://youtu.be/2olsGf6JIkU}}
+
+\item
+C++ Now 2019: Conor Hoekstra “算法直觉”\footnote{\url{https://youtu.be/48gV1SNm3WA}}
+
+\item
+MeetingC++ 2019: Conor Hoekstra “更好的算法直觉”\footnote{\url{https://youtu.be/TSZzvo4htTQ}}
+
+\item
+Conor Hoekstra “孪生算法”\footnote{\url{https://www.youtube.com/live/NiferfBvN3s}}
+
+\item
+C++ Weekly 第 187 集 “C++20 的 constexpr 算法”\footnote{\url{https://youtu.be/9YWzXSr2onY}}
+
+\item
+C++ Weekly 第 105 集 “学习‘现代’C++ 5：循环与算法”\footnote{\url{https://youtu.be/A0-x-Djey-Q}}
+
+\item
+算法选择指南\footnote{\url{https://codereport.github.io/Algorithm-Selection/}}
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
