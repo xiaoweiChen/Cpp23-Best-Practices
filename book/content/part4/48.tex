@@ -7,7 +7,7 @@
 \filename{图 84. 不使用 ranges 跳过第一个元素。}
 \begin{cpp}
 void print_all_but_first(const std::vector<int> &values) {
-  // 忘记这个检查，对空容器操作就会导致未定义行为（UB）
+  // 忘记这个检查，对空容器操作就会导致未定义行为(UB)
   if (values.empty()) { return; }
 
   for (auto itr = next(begin(values)); itr != end(values); ++itr) {
@@ -32,7 +32,7 @@ void print_all_but_first(const std::vector<int> &values) {
 \end{myTip}
 
 \begin{myTip}{练习}
-使用编译器探索器（compiler explorer）\footnote{\url{https://compiler-explorer.com}} 在不同优化级别下对比上面两个函数。
+使用编译器探索器(compiler explorer)\footnote{\url{https://compiler-explorer.com}} 在不同优化级别下对比上面两个函数。
 \end{myTip}
 
 \mySubsectionNoFile{48.1}{资源}

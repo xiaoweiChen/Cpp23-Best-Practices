@@ -10,9 +10,9 @@
 能否保证您的内部用户永远不会误用该 API？
 \end{myNotic}
 
-\begin{myTip}{练习：研究受检类型（Checked Types）}
-C++ 指南支持库（GSL）提供了一种 not\_null 指针类型，利用零成本抽象保证传入的指针永远不会是 nullptr。对于您当前使用原始指针的 API（假设无法重构 API），这种类型是否适用？
-std::string\_view（C++17）和 std::span（C++20）是传递给函数的指针/长度组合的绝佳替代方案。
+\begin{myTip}{练习：研究受检类型(Checked Types)}
+C++ 指南支持库(GSL)提供了一种 not\_null 指针类型，利用零成本抽象保证传入的指针永远不会是 nullptr。对于您当前使用原始指针的 API(假设无法重构 API)，这种类型是否适用？
+std::string\_view(C++17)和 std::span(C++20)是传递给函数的指针/长度组合的绝佳替代方案。
 \end{myTip}
 
 \mySubsectionNoFile{26.1}{资源}

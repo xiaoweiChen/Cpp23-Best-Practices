@@ -13,12 +13,12 @@ std::vector<>
 一种动态大小、基于堆的连续容器。虽然编译器不知道数据最终会存放在哪里，但它知道元素在内存中是彼此相邻排列的。这种连续性为编译器提供了更多的优化机会，并且对缓存更友好。
 \end{itemize}
 
-几乎其他任何容器的使用都需要添加注释并说明原因。对于小型容器，使用带线性搜索的扁平化映射（flat map）很可能比 std::map 更好。
+几乎其他任何容器的使用都需要添加注释并说明原因。对于小型容器，使用带线性搜索的扁平化映射(flat map)很可能比 std::map 更好。
 
 但不要对此过于狂热。如果你确实需要键值查找，请使用 std::map，然后评估它是否具有你想要的性能和特性。
 
 \begin{myTip}{练习：用 array 替换 vector}
-寻找固定大小的 vector，并尽可能将其替换为 array。借助 C++17 的类模板参数推导（Class Template Argument Deduction），这可以变得更加容易。
+寻找固定大小的 vector，并尽可能将其替换为 array。借助 C++17 的类模板参数推导(Class Template Argument Deduction)，这可以变得更加容易。
 
 \filename{图41. 用于固定大小数据的 ‘const std::vector‘。}
 

@@ -37,7 +37,7 @@
 
 ## 作者简介
 
-Jason 使用和教授 C++ 已有二十多年。他是 [C++Weekly]https://www.youtube.com/c/JasonTurner-lefticus）的主持人，也是众多 C++ 项目的作者，这些项目旨在帮助他人学习和探索 C++（https://github.com/lefticus/）。
+Jason 使用和教授 C++ 已有二十多年。他是 [C++Weekly]https://www.youtube.com/c/JasonTurner-lefticus)的主持人，也是众多 C++ 项目的作者，这些项目旨在帮助他人学习和探索 C++(https://github.com/lefticus/)。
 
 ## 本书相关
 

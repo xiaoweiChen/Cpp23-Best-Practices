@@ -6,17 +6,17 @@
 socket(int, int, int);
 \end{cpp}
 
-这些参数（顺序不定）代表：
+这些参数(顺序不定)代表：
 
 \begin{itemize}
 \item
-类型（type）
+类型(type)
 
 \item
-协议（protocol）
+协议(protocol)
 
 \item
-域（domain）
+域(domain)
 \end{itemize}
 
 这种设计是有问题的，但类似的问题也可能潜藏在我们的代码中。
@@ -74,7 +74,7 @@ Rectangle operator+(Rectangle, Position);
 
 \mySubsectionNoFile{28.1}{避免使用布尔参数}
 
-本书的一位预发布读者指出，Steve Maguire 在其著作《Writing Solid Code》（编写坚固的代码）第 5 章中提到：“让代码在调用点清晰可读。避免使用布尔参数。”
+本书的一位预发布读者指出，Steve Maguire 在其著作《Writing Solid Code》(编写坚固的代码)第 5 章中提到：“让代码在调用点清晰可读。避免使用布尔参数。”
 
 C++11 中的 enum class 提供了一种简便的方式，可以实现更强的类型检查，避免使用布尔参数，并使您的 API 更难被误用。
 
@@ -145,7 +145,7 @@ C++ Weekly Ep 107: “=delete 的威力”\footnote{\url{https://youtu.be/aAvjUU
 Adi Shavit 和 Björn Fahller “关联类型的奇特递归模式”\footnote{\url{https://youtu.be/msi4WNQZyWs}}
 
 \item
-研究“仿射空间类型（Affine space types）”。
+研究“仿射空间类型(Affine space types)”。
 
 \item
 C++Now 2017: Jonathan Müller “类型安全编程”\footnote{\url{https://youtu.be/iihlo9A2Ezw}}

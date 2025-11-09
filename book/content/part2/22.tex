@@ -2,11 +2,11 @@
 
 要生成所有可能的函数调用、所有可能的输入以及所有可能的组合，这是不可能完成的任务。幸运的是，已有工具可以解决这一问题。
 
-\mySubsectionNoFile{22.1}{模糊测试（Fuzzing）}
+\mySubsectionNoFile{22.1}{模糊测试(Fuzzing)}
 
 模糊测试器会生成各种长度的随机数据流。您编写的测试框架会接收这些数据流，并以适合您应用程序的方式对其进行处理。模糊测试器会分析测试执行过程中生成的代码覆盖率数据，并利用这些信息剔除冗余的测试，同时生成新的、具有新颖性和独特性的测试用例。
 
-理论上，如果运行时间足够长，模糊测试最终能够达到被测代码 100\% 的代码覆盖率。结合 AddressSanitizer 使用时，它将成为发现代码缺陷的强大工具。一篇发表于 2015 年的有趣文章\footnote{\url{https://blog.hboeck.de/archives/868-How-Heartbleed-couldve-been-found.html}}指出，若将模糊测试工具与 AddressSanitizer 结合使用，原本可以在不到 6 小时内发现 OpenSSL 中“心脏出血”（heartbleed）的安全漏洞。
+理论上，如果运行时间足够长，模糊测试最终能够达到被测代码 100\% 的代码覆盖率。结合 AddressSanitizer 使用时，它将成为发现代码缺陷的强大工具。一篇发表于 2015 年的有趣文章\footnote{\url{https://blog.hboeck.de/archives/868-How-Heartbleed-couldve-been-found.html}}指出，若将模糊测试工具与 AddressSanitizer 结合使用，原本可以在不到 6 小时内发现 OpenSSL 中“心脏出血”(heartbleed)的安全漏洞。
 
 \begin{myNotic}{}
 这个 6 小时的说法如今已严重过时。借助现代模糊测试工具和更先进的计算机，像 heartbleed 这样的漏洞只需几分钟即可被发现。
@@ -29,7 +29,7 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *Data,
 
 其中，Data 指针始终有效，Size 参数大于或等于 0。
 
-如果您的库主要负责解析输入文件（例如 libpng），那么您的工作就非常简单：
+如果您的库主要负责解析输入文件(例如 libpng)，那么您的工作就非常简单：
 
 \filename{图 8. 使用 libFuzzer 数据}
 
@@ -105,7 +105,7 @@ bool greaterThanFive(const int value) {
 }
 \end{cpp}
 
-如果某个变异后的代码仍然能通过所有测试，那么这个未被“杀死”的变异体（survived mutant）可能表明测试本身存在缺陷，或者原代码中存在潜在的 bug。
+如果某个变异后的代码仍然能通过所有测试，那么这个未被“杀死”的变异体(survived mutant)可能表明测试本身存在缺陷，或者原代码中存在潜在的 bug。
 
 \begin{myTip}{练习：创建一个模糊测试框架}
 应用本节中的示例，为您的代码创建模糊测试器。您遇到了哪些挑战？

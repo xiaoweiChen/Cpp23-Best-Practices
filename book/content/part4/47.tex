@@ -14,7 +14,7 @@ auto const result = std::count( /* stuff */ );
 \end{cpp}
 
 \begin{myTip}{}
-使用 auto 可以避免不必要的转换和数据丢失。这与范围 for 循环（ranged-for loops）的道理相同。auto 要求必须进行初始化，这一点和 const 一样，其背后的原因也相同。
+使用 auto 可以避免不必要的转换和数据丢失。这与范围 for 循环(ranged-for loops)的道理相同。auto 要求必须进行初始化，这一点和 const 一样，其背后的原因也相同。
 \end{myTip}
 
 \filename{图 69. auto 要求初始化}
@@ -49,7 +49,7 @@ Arithmetic divide(Arithmetic numerator, Arithmetic denominator) {
 }
 \end{cpp}
 
-这段代码强制我们对分子和分母使用相同的类型（你可以试试看，会得到一些奇怪的编译错误）。
+这段代码强制我们对分子和分母使用相同的类型(你可以试试看，会得到一些奇怪的编译错误)。
 
 \filename{图 73. 让 C++ 98 模板变得更泛化？}
 \begin{cpp}
@@ -73,7 +73,7 @@ auto divide(Numerator numerator, Denominator denominator)
 }
 \end{cpp}
 
-但在 C++14 中，我们可以完全省略返回类型（记住，跳过 C++11）。
+但在 C++14 中，我们可以完全省略返回类型(记住，跳过 C++11)。
 
 \filename{图 75. C++14 的 ‘auto‘ 返回类型。}
 \begin{cpp}
@@ -84,7 +84,7 @@ auto divide(Numerator numerator, Denominator denominator)
 }
 \end{cpp}
 
-在 C++20 中，我们可以使用 auto 函数参数进一步简化这段代码（这会为我们创建隐式模板）
+在 C++20 中，我们可以使用 auto 函数参数进一步简化这段代码(这会为我们创建隐式模板)
 
 \filename{图 76. C++20 的 ‘auto‘ 参数。}
 \begin{cpp}
@@ -164,7 +164,7 @@ int main() {
 \end{myTip}
 
 \begin{myTip}{练习：建立你的实验库}
-上面的练习非常适合整理成一系列实验，并保存在你 GitHub 的代码片段（gists）中，正如《C++ 并非魔法》一书中所提到的那样。
+上面的练习非常适合整理成一系列实验，并保存在你 GitHub 的代码片段(gists)中，正如《C++ 并非魔法》一书中所提到的那样。
 \end{myTip}
 
 \begin{myTip}{练习：理解 auto 和模板推导的关系}
@@ -178,6 +178,6 @@ int main() {
 clang-tidy modernize-use-auto\footnote{\url{https://clang.llvm.org/extra/clang-tidy/checks/modernize-use-auto.html}}
 
 \item
-“几乎总是使用 auto”（AAA，Almost Always Auto)\footnote{\url{https://herbsutter.com/2013/08/12/gotw-94-solution-aaa-style-almost-always-auto/}}
+“几乎总是使用 auto”(AAA，Almost Always Auto)\footnote{\url{https://herbsutter.com/2013/08/12/gotw-94-solution-aaa-style-almost-always-auto/}}
 \end{itemize}
 

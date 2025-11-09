@@ -1,4 +1,4 @@
-Sanitizer（检测工具）是 C++ 的运行时分析工具，已集成在 GCC、Clang 和 MSVC 中。
+Sanitizer(检测工具)是 C++ 的运行时分析工具，已集成在 GCC、Clang 和 MSVC 中。
 
 如果你熟悉 Valgrind，那么这些 Sanitizer 提供了类似的功能，但速度比 Valgrind 快几个数量级。
 
@@ -6,22 +6,22 @@ Sanitizer（检测工具）是 C++ 的运行时分析工具，已集成在 GCC�
 
 \begin{itemize}
 \item
-地址检测器（Address Sanitizer, ASan）
+地址检测器(Address Sanitizer, ASan)
 
 \item
-未定义行为检测器（Undefined Behavior Sanitizer, UBSan）（关于未定义行为的更多内容将在后续章节介绍）
+未定义行为检测器(Undefined Behavior Sanitizer, UBSan)(关于未定义行为的更多内容将在后续章节介绍)
 
 \item
-线程检测器（Thread Sanitizer）
+线程检测器(Thread Sanitizer)
 
 \item
-数据流检测器（DataFlow Sanitizer，用于代码分析，而非查找缺陷）
+数据流检测器(DataFlow Sanitizer，用于代码分析，而非查找缺陷)
 
 \item
-Lib Fuzzer（将在后续章节中介绍）
+Lib Fuzzer(将在后续章节中介绍)
 \end{itemize}
 
-地址检测器（ASan）、未定义行为检测器（UBSan）和线程检测器（TSan）几乎能像“魔法”一样发现许多问题。在本书编写时，MSVC 对 Sanitizer 的支持正在逐步增强，而 GCC 和 Clang 已经提供了更成熟的支持。
+地址检测器(ASan)、未定义行为检测器(UBSan)和线程检测器(TSan)几乎能像“魔法”一样发现许多问题。在本书编写时，MSVC 对 Sanitizer 的支持正在逐步增强，而 GCC 和 Clang 已经提供了更成熟的支持。
 
 John Regehr\footnote{\url{https://twitter.com/johnregehr}} 建议在开发过程中始终启用 ASan 和 UBSan。
 
@@ -59,11 +59,11 @@ gcc -fsanitize=address,undefined
 再次运行完整测试套件
 \end{itemize}
 
-最终目标：在你的持续集成（CI）环境中，实现所有测试在启用 ASan 和 UBSan 的情况下顺利运行。
+最终目标：在你的持续集成(CI)环境中，实现所有测试在启用 ASan 和 UBSan 的情况下顺利运行。
 \end{myTip}
 
 \begin{myTip}{练习：回退到 Valgrind 或 Dr. Memory}
-如果你无法在当前环境中运行 ASan 和 UBSan，请尝试使用 Dr. Memory（支持 Windows/Linux/MacOS）或 Valgrind（支持 Linux/MacOS）来运行你的测试套件。
+如果你无法在当前环境中运行 ASan 和 UBSan，请尝试使用 Dr. Memory(支持 Windows/Linux/MacOS)或 Valgrind(支持 Linux/MacOS)来运行你的测试套件。
 \end{myTip}
 
 \mySubsectionNoFile{19.1}{资源}
@@ -73,7 +73,7 @@ gcc -fsanitize=address,undefined
 MSVC 在 Windows 上支持 AddressSanitizer (ASan)\footnote{\url{https://devblogs.microsoft.com/cppblog/addresssanitizer-asan-for-windows-with-msvc/}}
 
 \item
-Sanitizer 的源码和文档（GitHub）\footnote{\url{https://github.com/google/sanitizers}}
+Sanitizer 的源码和文档(GitHub)\footnote{\url{https://github.com/google/sanitizers}}
 
 \item
 Clang AddressSanitizer 文档\footnote{\url{https://clang.llvm.org/docs/AddressSanitizer.html}}

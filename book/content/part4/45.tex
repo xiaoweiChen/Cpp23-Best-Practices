@@ -1,4 +1,4 @@
-许多人（如 Kate Gregory 和 James McNellis）都曾多次强调过这一点。将对象声明为 const 有两个作用：
+许多人(如 Kate Gregory 和 James McNellis)都曾多次强调过这一点。将对象声明为 const 有两个作用：
 
 \begin{enumerate}
 \item
@@ -31,13 +31,13 @@ const auto data = [](){ // no parameters
 \end{cpp}
 
 \begin{myTip}{}
-由于返回值优化（RVO），使用 lambda 通常不会增加任何开销，甚至可能提升性能。
+由于返回值优化(RVO)，使用 lambda 通常不会增加任何开销，甚至可能提升性能。
 \end{myTip}
 
 在这一过程中，你是否将一些 static 变量改为了 const？如果是，请继续进行 constexpr 相关的练习。
 
 \begin{myWarning}{}
-对于将要返回的值，使用 const 在某些情况下可能会破坏隐式移动（implicit moves）！
+对于将要返回的值，使用 const 在某些情况下可能会破坏隐式移动(implicit moves)！
 \end{myWarning}
 
 然而，需要注意的是，总体而言，依赖返回值的隐式移动和 RVO 可能会有些脆弱。最好的做法是干脆不要给要返回的对象命名。
@@ -47,7 +47,7 @@ ReturnType some_function(int value)
 {
   // 如果 result 和 ReturnType 的类型不同，
   // 且存在隐式转换，则会破坏隐式移动。
-  // 如果类型相同，则依赖编译器进行 NRVO（命名返回值优化），
+  // 如果类型相同，则依赖编译器进行 NRVO(命名返回值优化)，
   // 但这在包含多个分支的代码中并不总是有效
   const auto result = get_value(value + 42);
   return result;
@@ -66,7 +66,7 @@ ReturnType some_function(int value)
 \end{cpp}
 
 \begin{myNotic}{}
-Clang-tidy 的 No Automatic Move\footnote{\url{https://clang.llvm.org/extra//clang-tidy/checks/performance-no-automatic-move.html}} 分析功能在很大程度上是有缺陷的。它在 NRVO 拷贝省略适用时仍会发出警告，而在真正重要的地方却不会警告！（截至 2022 年 2 月 23 日）。参见此分析：\url{https://compiler-explorer.com/z/a4K76nbhq}。
+Clang-tidy 的 No Automatic Move\footnote{\url{https://clang.llvm.org/extra//clang-tidy/checks/performance-no-automatic-move.html}} 分析功能在很大程度上是有缺陷的。它在 NRVO 拷贝省略适用时仍会发出警告，而在真正重要的地方却不会警告！(截至 2022 年 2 月 23 日)。参见此分析：\url{https://compiler-explorer.com/z/a4K76nbhq}。
 \end{myNotic}
 
 \begin{myWarning}{}
@@ -86,7 +86,7 @@ CppCon 2019: Jason Turner “C++代码异味”\footnote{\url{https://youtu.be/f
 C++ 中 const 或引用成员变量的影响\footnote{\url{https://lesleylai.info/en/const-and-reference-member-variables/}}
 
 \item
-C++Now 2018: Ben Deane “易于使用，难以误用：C++ 中的声明式风格”\footnote{\url{https://youtu.be/2ouxETt75R4}}（建立在使 const 更易应用的技术之上。）
+C++Now 2018: Ben Deane “易于使用，难以误用：C++ 中的声明式风格”\footnote{\url{https://youtu.be/2ouxETt75R4}}(建立在使 const 更易应用的技术之上。)
 \end{itemize}
 
 

@@ -2,12 +2,12 @@
 我比以往任何时候都更强烈地主张使用 constexpr！
 \end{myNotic}
 
-C++23 和模块（modules）结合在一起，几乎消除了所有不使用 constexpr 的理由。
+C++23 和模块(modules)结合在一起，几乎消除了所有不使用 constexpr 的理由。
 现在，在你的模块接口文件中将函数声明为 constexpr 应该成为你的默认选择。
 
 \begin{itemize}
 \item
-有了模块，真正实现了“只为所用付费”（对模块使用者的成本几乎为零）
+有了模块，真正实现了“只为所用付费”(对模块使用者的成本几乎为零)
 
 \item
 constexpr 启用了你未曾考虑过的编译时计算用例
@@ -25,7 +25,7 @@ constexpr 启用了你未曾考虑过的编译时计算用例
 你需要 C++26 才能从标准库中获得 constexpr 版本的三角函数。
 \end{myWarning}
 
-如果你看到像这样的代码（我在真实代码中见过）：
+如果你看到像这样的代码(我在真实代码中见过)：
 
 \filename{图60. 在编译时已知的 ‘static const’ 数据。}
 \begin{cpp}
@@ -121,7 +121,7 @@ static constexpr std::array angles{-90,-45,0,45,90};
 
 \begin{itemize}
 \item
-C++Now 2017: Ben Deane \& Jason Turner “constexpr ALL the things”\footnote{\url{https://youtu.be/HMB9oXFobJc}}（关于现代 constexpr 技术略显过时）
+C++Now 2017: Ben Deane \& Jason Turner “constexpr ALL the things”\footnote{\url{https://youtu.be/HMB9oXFobJc}}(关于现代 constexpr 技术略显过时)
 
 \item
 C++ Weekly 第233集: constexpr map vs std::map \footnote{\url{https://youtu.be/INn3xa4pMfg}}
@@ -133,7 +133,7 @@ Meeting C++ 2017: Jason Turner “Practical constexpr” \footnote{\url{https://
 C++ Russia 2019: Hana Dusíková “编译时常量正则表达式的现状”\footnote{\url{https://youtu.be/r_ZASJFQGQI}}
 
 \item
-C++ Weekly 第312集: 停止使用 constexpr（并使用这个代替！）\footnote{\url{https://youtu.be/4pKtPWcl1Go}}
+C++ Weekly 第312集: 停止使用 constexpr(并使用这个代替！)\footnote{\url{https://youtu.be/4pKtPWcl1Go}}
 
 \item
 C++ Weekly: constexpr vs static constexpr \footnote{\url{https://youtu.be/IDQ0ng8RIqs}}

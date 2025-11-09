@@ -1,4 +1,4 @@
-尽可能将代码移出模板。使用其他函数，使用基类。编译器仍然可以自由地选择将它们内联或不内联。减少模板的使用能够改善编译时间并减小二进制文件大小，这两点都有益处。这样做还能消除人们通常所说的“模板代码膨胀”（在我看来这种现象并不存在\footnote{\url{https://articles.emptycrate.com/2008/05/06/nobody_understands_c_part_5_template_code_bloat.html}}）（文章格式在某个时候被破坏了，抱歉）。
+尽可能将代码移出模板。使用其他函数，使用基类。编译器仍然可以自由地选择将它们内联或不内联。减少模板的使用能够改善编译时间并减小二进制文件大小，这两点都有益处。这样做还能消除人们通常所说的“模板代码膨胀”(在我看来这种现象并不存在\footnote{\url{https://articles.emptycrate.com/2008/05/06/nobody_understands_c_part_5_template_code_bloat.html}})(文章格式在某个时候被破坏了，抱歉)。
 
 \filename{图 111. 每个函数模板实例化都生成一个新的 lambda。}
 \begin{cpp}
@@ -42,7 +42,7 @@ Templight\footnote{\url{https://github.com/mikael-s-persson/templight}}
 C++ 周刊 第89集：“过度使用Lambda”\footnote{\url{https://youtu.be/OmKMNQFx_8Y}}
 
 \item
-C++ 周刊 2019 圣诞特辑 - 第 3 章\footnote{\url{https://www.youtube.com/watch?v=VEqOOKU8RjQ&list=PLs3KjaCtOwSY_Awyliwm-fRjEOa-SRbs-&index=16}} （这是第 3 章的第一集，介绍了两种不同选项为何存在差异的问题\footnote{\url{https://godbolt.org/z/b4znvK}}。该播放列表中的接下来几集提供了一些背景知识，而第 4 章的开头给出了答案。这与模板膨胀问题密切相关。）
+C++ 周刊 2019 圣诞特辑 - 第 3 章\footnote{\url{https://www.youtube.com/watch?v=VEqOOKU8RjQ&list=PLs3KjaCtOwSY_Awyliwm-fRjEOa-SRbs-&index=16}} (这是第 3 章的第一集，介绍了两种不同选项为何存在差异的问题\footnote{\url{https://godbolt.org/z/b4znvK}}。该播放列表中的接下来几集提供了一些背景知识，而第 4 章的开头给出了答案。这与模板膨胀问题密切相关。)
 
 \item
 《Effective C++ (第三版)》条款 44 - 将与参数无关的代码从模板中分离出来

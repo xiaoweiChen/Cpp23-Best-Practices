@@ -1,4 +1,4 @@
-直接初始化（Direct-Initialization）提供了一种高效的方式来初始化公有数据成员。
+直接初始化(Direct-Initialization)提供了一种高效的方式来初始化公有数据成员。
 
 \filename{图 124. 直接初始化示例}
 \begin{cpp}
@@ -20,7 +20,7 @@ int main()
 
 其缺点是代码可读性较差。我们无法直观地知道那两个参数 "Hello" 和 "World" 分别对应哪个成员。
 
-C++20 引入了“指定初始化器”（designated initializers），允许你明确指定要初始化的对象名称。
+C++20 引入了“指定初始化器”(designated initializers)，允许你明确指定要初始化的对象名称。
 
 \begin{itemize}
 \item
@@ -73,7 +73,7 @@ private:
 \end{myTip}
 
 \begin{myTip}{}
-在许多情况下，简单的公有结构体比带有 getter、setter 和复杂构造函数的类更好。但这仅在各成员值之间没有相互依赖关系（即不存在需要维护的不变式）时才成立。
+在许多情况下，简单的公有结构体比带有 getter、setter 和复杂构造函数的类更好。但这仅在各成员值之间没有相互依赖关系(即不存在需要维护的不变式)时才成立。
 \end{myTip}
 
 \mySubsectionNoFile{61.1}{资源}

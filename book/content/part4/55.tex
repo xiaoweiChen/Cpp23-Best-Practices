@@ -10,7 +10,7 @@ auto divide(Numerator numerator, Denominator denominator)
 }
 \end{cpp}
 
-现在，我们希望在进行整数除法时添加不同的行为。在 C++17 之前，我们会使用 SFINAE（“替换失败并非错误”）。这本质上意味着，如果一个函数的实例化失败，它就会从重载决议中被移除。
+现在，我们希望在进行整数除法时添加不同的行为。在 C++17 之前，我们会使用 SFINAE(“替换失败并非错误”)。这本质上意味着，如果一个函数的实例化失败，它就会从重载决议中被移除。
 
 \filename{图 107. 使用 SFINAE 的 'divide' 函数。}
 \begin{cpp}
@@ -98,7 +98,7 @@ if constexpr 块内的代码在语法上仍然必须是正确的。if constexpr 
 你通常可能会选择放在 if 块外部的代码，现在可能需要放在 else 块内部，以确保它不会用无效的类型进行实例化。
 \end{myTip}
 
-\begin{myTip}{练习：研究“内省式设计”（design by introspection）}
+\begin{myTip}{练习：研究“内省式设计”(design by introspection)}
 if constexpr、concepts 和 requires 的结合产生了一种非常强大的、几乎类似反射的能力。
 
 \filename{图 110. “内省式设计”示例}
