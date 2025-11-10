@@ -1,10 +1,10 @@
-你没有使用许多编译警告，而其中大多数警告实际上非常有益。在 GCC 和 Clang 中，-Wall 并不会开启所有警告，-Wextra 也仍然只是触及了表面而已！
+编译警告中大多数警告实际上非常有益。在 GCC 和 Clang 中，-Wall 并不会开启所有警告，-Wextra 也仍然只是触及了表面而已！
 
 \begin{myNotic}{}
 MSVC 上的 /Wall 才是真正开启所有警告。我们的编译器开发人员不建议在 MSVC 上使用 /Wall 或在 Clang 上使用 -Weverything，因为其中许多是诊断性警告，并不需要采取操作。GCC 并未提供等效选项。
 \end{myNotic}
 
-强烈建议使用 -Wpedantic(GCC/Clang)。该命令行选项会禁用语言扩展，使你的代码更贴近 C++ 标准。你现在启用的警告越多，将来移植到其他平台时就会越轻松。
+强烈建议使用 -Wpedantic(GCC/Clang)。该命令行选项会禁用语言扩展，使代码更贴近 C++ 标准。你现在启用的警告越多，将来移植到其他平台时就会越轻松。
 
 \begin{myNotic}{}
 从 MSVC 的 C++20 模式开始，/permissive- 已不再需要，它现在是 cl.exe 的默认设置。
@@ -13,7 +13,7 @@ MSVC 上的 /Wall 才是真正开启所有警告。我们的编译器开发人�
 \begin{myTip}{练习：启用更多警告}
 \begin{itemize}
 \item
-探索你的编译器支持的所有警告选项，尽可能多地启用它们。
+探索编译器支持的所有警告选项，尽可能多地启用。
 
 \item
 修复由此产生的新警告。
@@ -26,7 +26,7 @@ MSVC 上的 /Wall 才是真正开启所有警告。我们的编译器开发人�
 MSVC 提供了一组优秀的警告，可通过警告级别启用。你可以从 /W1 开始，随着逐步修复警告，逐步提升到 /W4。
 \end{myNotic}
 
-这个过程可能感觉繁琐且无意义，但这些警告确实能捕捉到真实的 bug。
+这个过程可能繁琐且无意义，但这些警告确实能捕捉到真实的 bug。
 
 \end{myTip}
 
@@ -50,5 +50,5 @@ Clang 完整警告列表\footnote{\url{https://clang.llvm.org/docs/DiagnosticsRe
 MSVC 默认关闭的编译器警告\footnote{\url{https://docs.microsoft.com/en-us/cpp/preprocessor/compiler-warnings-that-are-off-by-default?view=vs-2019}}
 
 \item
-C++ Weekly 第 168 集 - 发现你该使用的警告\footnote{\url{https://youtu.be/IOo8gTDMFkM}}
+C++ Weekly 第 168 集 - 发现该使用的警告\footnote{\url{https://youtu.be/IOo8gTDMFkM}}
 \end{itemize}

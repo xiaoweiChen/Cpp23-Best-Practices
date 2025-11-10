@@ -1,18 +1,18 @@
-在您的平台上支持至少两种编译器。每种编译器执行不同的分析，并以略微不同的方式实现标准。
+平台上支持至少两种编译器。每种编译器执行不同的分析，并以略微不同的方式实现标准。
 
-如果您使用 Visual Studio，您应该能够相对轻松地在 clang 和 cl.exe 之间切换。您也可以使用 WSL 并启用远程 Linux 构建。
+如果使用 Visual Studio，应该能够相对轻松地在 clang 和 cl.exe 之间切换，也可以使用 WSL 并启用远程 Linux 构建。
 
-如果您使用 Linux，您应该能够轻松地在 GCC 和 Clang 之间切换。
+如果使用 Linux，应该能够轻松地在 GCC 和 Clang 之间切换。
 
 \begin{myNotic}{}
-在 MacOS 上，请确保您使用的编译器确实是您认为的那个。gcc 命令很可能是 Apple 安装的 clang 的符号链接。
+在 MacOS 上，请确保使用的编译器确实是您认为的那个。gcc 命令很可能是 Apple 安装的 clang 的符号链接。
 \end{myNotic}
 
 \begin{myNotic}{}
 apple-clang 并不等同于主线版本的 clang，其版本号也不一致。通常很难知道 apple-clang 支持哪些特性。cppreference 的编译器支持参考可能会有所帮助\footnote{\url{https://en.cppreference.com/w/cpp/compiler_support}}。
 \end{myNotic}
 
-要在您的平台上安装更新或不同的编译器，可参考以下资源：
+要在平台上安装更新或不同的编译器，可参考以下资源：
 
 Ubuntu / Debian
 
@@ -38,18 +38,18 @@ Homebrew / MacPorts
 \end{itemize}
 
 \begin{myTip}{练习：添加另一个编译器}
-既然您已经启用了系统的持续构建，现在是时候添加另一个编译器了。
+既然已经启用了系统的持续构建，现在是时候添加另一个编译器了。
 
-升级到您当前所用编译器的新版本总是一个好主意。但如果您只支持 GCC，请考虑添加 Clang；或者如果您只支持 Clang，则添加 GCC。如果您在 Windows 上，请在 MSVC 之外添加 MinGW 或 Clang。
+升级到当前所用编译器的新版本总是一个好主意。但如果只支持 GCC，请考虑添加 Clang；或者如果只支持 Clang，则添加 GCC。如果使用 Windows，请在 MSVC 之外添加 MinGW 或 Clang。
 \end{myTip}
 
 \begin{myTip}{练习：添加另一个操作系统}
-希望您的项目至少有一部分可以移植到另一个操作系统上。尝试让项目的一部分在另一个操作系统和工具链上成功编译，将极大地帮助您了解自己代码的本质。
+当希望项目至少有一部分可以移植到另一个操作系统上。尝试让项目的一部分在另一个操作系统和工具链上成功编译，将有助于了解当前的代码。
 \end{myTip}
 
 \mySubsectionNoFile{21.1}{资源}
 
 \begin{itemize}
 \item
-C++Now 2015: Jason Turner “编写可移植代码：如何以及为何让您的 C++ 跨平台”\footnote{\url{https://youtu.be/cb3WIL96N-o}}
+C++Now 2015: Jason Turner “编写可移植代码：如何/为何让 C++ 项目跨平台”\footnote{\url{https://youtu.be/cb3WIL96N-o}}
 \end{itemize}

@@ -1,24 +1,24 @@
-你需要一个单一命令来运行测试。如果你没有这样的命令，就没人会去运行测试。
+你需要单一命令来运行测试。如果没有这样的命令，就没人愿意运行测试。
 
 \begin{itemize}
 \item
-Catch2\footnote{\url{https://github.com/catchorg/Catch2}} —— 由 Phil Nash\footnote{\url{https://twitter.com/phil_nash}} 和 Martin Hořeňovský\footnote{\url{https://twitter.com/horenmar_ctu}} 开发的流行且支持良好的测试框架
+Catch2\footnote{\url{https://github.com/catchorg/Catch2}} --- 由 Phil Nash\footnote{\url{https://twitter.com/phil_nash}} 和 Martin Hořeňovský\footnote{\url{https://twitter.com/horenmar_ctu}} 开发的主流测试框架
 
 \item
-doctest\footnote{\url{https://github.com/onqtam/doctest}} —— 与 Catch2 类似，但更轻量，注重编译时性能
+doctest\footnote{\url{https://github.com/onqtam/doctest}} --- 与 Catch2 类似，但更轻量，注重编译时性能
 
 \item
 Google Test\footnote{\url{https://github.com/google/googletest}}
 
 \item
-Boost.Test\footnote{\url{https://www.boost.org/doc/libs/1_74_0/libs/test/doc/html/index.html}} —— 遵循 Boost 风格的测试框架
+Boost.Test\footnote{\url{https://www.boost.org/doc/libs/1_74_0/libs/test/doc/html/index.html}} --- 遵循 Boost 风格的测试框架
 \end{itemize}
 
-test\footnote{\url{https://cmake.org/cmake/help/latest/manual/ctest.1.html}} 是 CMake 的测试运行器，可与上述任意框架配合使用，通过 CMake 的 add\_test 功能\footnote{\url{https://cmake.org/cmake/help/latest/command/add_test.html}} 进行集成。
+ctest\footnote{\url{https://cmake.org/cmake/help/latest/manual/ctest.1.html}} 是 CMake 的测试运行器，可与上述任意框架配合使用，通过 CMake 的 add\_test 功能\footnote{\url{https://cmake.org/cmake/help/latest/command/add_test.html}} 进行集成。
 
-使用 CMake 时，一个理想的构建 / 测试流程可能如下所示：
+使用 CMake 时，构建 / 测试流程可如下所示：
 
-\filename{图 6. 可能的简易构建/测试步骤}
+\filename{图 6. 简易的构建/测试步骤}
 
 \begin{shell}
 cmake -S ../src/dir -B builddir -G <Generator>
@@ -27,26 +27,26 @@ cd builddir
 ctest -C <Configuration>
 \end{shell}
 
-你需要熟悉这些工具的功能，并从中做出选择。如果没有自动化测试，本书其余内容将毫无意义。如果你无法验证自己是否破坏了现有代码，就无法实践书中的练习。Oleg Rabaev 在 CppCast 中曾指出：
+你需要熟悉这些工具的功能，并从中做出选择。如果没有自动化测试，本书其余内容将毫无意义。如果无法验证自己是否破坏了现有代码，就无法实践书中的练习。Oleg Rabaev 在 CppCast 中曾指出：
 
 \begin{itemize}
 \item
-如果一个组件难以测试，说明它的设计不合理。
+如果一个组件难以测试，说明设计不合理。
 
 \item
-如果一个组件易于测试，这通常是设计良好的标志。
+如果一个组件易于测试，通常是设计良好的标志。
 
 \item
-如果一个组件设计合理，它就易于测试。
+如果一个组件设计合理，就易于测试。
 \end{itemize}
 
-\begin{myTip}{练习：你能用一条命令运行一组测试吗？}
+\begin{myTip}{练习：能用一条命令运行一组测试吗？}
 \begin{itemize}
 \item
 是：太棒了！运行测试并确保它们全部通过！
 
 \item
-否：你的程序会产生输出吗？
+否：程序会产生输出吗？
 \begin{itemize}
 \item
 是：从“Approval Tests\footnote{\url{https://cppcast.com/clare-macrae/}}”开始，它将为你提供测试入门所需的基础。

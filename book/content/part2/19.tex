@@ -1,8 +1,8 @@
-Sanitizer(检测工具)是 C++ 的运行时分析工具，已集成在 GCC、Clang 和 MSVC 中。
+消杀器(Sanitizer)是 C++ 的运行时分析工具，已集成在 GCC、Clang 和 MSVC 中。
 
-如果你熟悉 Valgrind，那么这些 Sanitizer 提供了类似的功能，但速度比 Valgrind 快几个数量级。
+如果熟悉 Valgrind，那么这些消杀器提供了类似的功能，但速度比 Valgrind 快几个数量级。
 
-可用的 Sanitizer 包括：
+可用的 消杀器 包括：
 
 \begin{itemize}
 \item
@@ -21,36 +21,36 @@ Sanitizer(检测工具)是 C++ 的运行时分析工具，已集成在 GCC、Cla
 Lib Fuzzer(将在后续章节中介绍)
 \end{itemize}
 
-地址检测器(ASan)、未定义行为检测器(UBSan)和线程检测器(TSan)几乎能像“魔法”一样发现许多问题。在本书编写时，MSVC 对 Sanitizer 的支持正在逐步增强，而 GCC 和 Clang 已经提供了更成熟的支持。
+地址检测器(ASan)、未定义行为检测器(UBSan)和线程检测器(TSan)能像“魔法”一样发现许多问题。在本书编写时，MSVC 对消杀器的支持正在逐步增强，而 GCC 和 Clang 已经提供了更成熟的支持。
 
 John Regehr\footnote{\url{https://twitter.com/johnregehr}} 建议在开发过程中始终启用 ASan 和 UBSan。
 
-当发生诸如越界内存访问等错误时，Sanitizer 会报告导致失败的具体条件，通常还会提供修复建议。
+当发生诸如越界内存访问等错误时，消杀器会报告导致失败的具体条件，通常还会提供修复建议。
 
-你可以通过类似以下命令启用地址和未定义行为检测器：
+可以通过类似以下命令启用地址和未定义行为检测器：
 
 \begin{shell}
 gcc -fsanitize=address,undefined 
 \end{shell}
 
-注意：Sanitizer 必须在项目构建的链接阶段也保持启用。
+注意：消杀器必须在项目构建的链接阶段保持启用。
 
 \begin{myNotic}{}
-如何在 CMake 中使用 Sanitizer 的示例，可以在 C++ CMake 模板项目中找到\footnote{\url{https://github.com/cpp-best-practices/cmake_template}}
+如何在 CMake 中使用消杀器的示例，可以在 C++ CMake 模板项目中找到\footnote{\url{https://github.com/cpp-best-practices/cmake_template}}
 \end{myNotic}
 
-请记住，要结合使用 Debug、Release、启用 Sanitizer 和禁用 Sanitizer 的构建方式，因为每种组合都可能暴露出不同的代码问题。
+请记住，要结合使用 Debug、Release、启用消杀器和禁用消杀器的构建方式，每种组合都可能暴露出不同的代码问题。
 
-\begin{myTip}{练习：启用 Sanitizer}
+\begin{myTip}{练习：启用消杀器}
 \begin{itemize}
 \item
-研究如何为现有项目添加 Sanitizer 支持
+研究如何为现有项目添加消杀器支持
 
 \item
 首先启用 ASan
 
 \item
-运行完整的测试套件，并调查发现的任何问题
+运行完整的测试套件，并调查发现的问题
 
 \item
 然后启用 UBSan
@@ -63,7 +63,7 @@ gcc -fsanitize=address,undefined
 \end{myTip}
 
 \begin{myTip}{练习：回退到 Valgrind 或 Dr. Memory}
-如果你无法在当前环境中运行 ASan 和 UBSan，请尝试使用 Dr. Memory(支持 Windows/Linux/MacOS)或 Valgrind(支持 Linux/MacOS)来运行你的测试套件。
+如果你无法在当前环境中运行 ASan 和 UBSan，请尝试使用 Dr. Memory(支持 Windows/Linux/MacOS)或 Valgrind(支持 Linux/MacOS)来运行测试套件。
 \end{myTip}
 
 \mySubsectionNoFile{19.1}{资源}

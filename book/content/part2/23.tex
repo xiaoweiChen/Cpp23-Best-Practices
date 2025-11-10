@@ -12,11 +12,11 @@ Bazel\footnote{\url{https://bazel.build/}}
 其他工具\footnote{\url{https://github.com/lefticus/cppbestpractices/blob/master/02-Use_the_Tools_Available.md}}
 \end{itemize}
 
-原始的 Makefile 或 Visual Studio 项目文件使得实现上述各项内容变得过于困难。请使用构建工具来帮助您维护跨平台和跨编译器的可移植性。
+原始的 Makefile 或 Visual Studio 项目文件，使得实现上述各项内容变得过于困难。请使用构建工具，来帮助维护跨平台和跨编译器的可移植性。
 
-请像对待其他任何代码一样对待您的构建脚本。它们有自己的一套最佳实践，编写出难以维护的构建脚本，就像写出难以维护的 C++ 代码一样容易。
+请像对待其他任何代码一样对待构建脚本。它们有自己的一套最佳实践，编写出难以维护的构建脚本，就像写出难以维护的 C++ 代码一样容易。
 
-构建生成工具(build generators)还能通过诸如 `cmake --build` 这样的命令，帮助您抽象并简化持续构建环境，该命令能够在任何平台上执行正确的构建操作。
+构建生成工具还能通过诸如 \verb|cmake --build| 这样的命令，抽象并简化持续构建环境，该命令能够在任何平台上执行正确的构建操作。
 
 \begin{myTip}{练习：审视您的构建系统}
 \begin{itemize}
@@ -27,7 +27,8 @@ Bazel\footnote{\url{https://bazel.build/}}
 您的构建脚本有多久的历史了？
 \end{itemize}
 
-检查是否有当前的最佳实践需要应用。是否存在类似 `tidy` 的工具或格式化工具可用于您的构建脚本？  
+检查是否有当前的最佳实践需要应用。是否存在类似 tidy 的工具或格式化工具可用于您的构建脚本？
+
 回顾本书前面提到的最佳实践，思考它们如何适用于您的构建脚本。
 
 \begin{itemize}
@@ -40,7 +41,7 @@ Bazel\footnote{\url{https://bazel.build/}}
 \end{myTip}
 
 \begin{myTip}{}
-最新版本的 CMake 增加了诸如 `--profiling-output` 之类的工具，可以帮助您查看生成器在哪些环节耗时最多。
+最新版本的 CMake 增加了诸如 \verb|--profiling-output| 之类的工具，可以帮助您查看生成器在哪些环节耗时最多。
 \end{myTip}
 
 \mySubsectionNoFile{23.1}{资源}
@@ -65,10 +66,10 @@ CppCon 2018: Jussi Pakkanen “使用 Meson 构建系统轻松编译数百万行
 BazelCon 2019\footnote{\url{https://www.youtube.com/playlist?list=PLxNYxgaZ8Rsf-7g43Z8LyXct9ax6egdSj}}
 
 \item
-CppCon 2019: Mathieu Ropert “Cato the Elder”\footnote{\url{https://youtu.be/D07iF4Lp4kM}} —— 关于构建脚本质量的简短吐槽
+CppCon 2019: Mathieu Ropert “Cato the Elder”\footnote{\url{https://youtu.be/D07iF4Lp4kM}} --- 关于构建脚本质量的简短吐槽
 
 \item
-C++ Weekly Ep 218 - 终极 CMake / C++ 快速入门\footnote{\url{https://youtu.be/YbgH7yat-Jo}}
+C++ Weekly - 第218集 - 终极 CMake / C++ 快速入门\footnote{\url{https://youtu.be/YbgH7yat-Jo}}
 
 \item
 关于 CMake 资源的 Twitter 讨论\footnote{\url{https://twitter.com/Cor3ntin/status/1310990444915032067}}

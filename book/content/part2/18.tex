@@ -1,4 +1,4 @@
-请记住，首先要专注于让你的接口“难以被错误使用”。然后，作为第二道防线，考虑编写你自己的静态分析工具。
+请记住，先要专注于让接口“难以误用”。然后，作为第二道防线，考虑编写静态分析工具。
 
 这些工具可以表现为以下形式：
 
@@ -7,17 +7,17 @@
 自定义的 clang-tidy 分析\footnote{\url{https://clang.llvm.org/extra/clang-tidy/Contributing.html}}
 
 \item
-使用 clang-query 查询项目的抽象语法树(AST)\footnote{\url{https://clang.llvm.org/docs/LibASTMatchersReference.html}}，以发现常见错误
+使用 clang-query 查询项目的抽象语法树(AST)\footnote{\url{https://clang.llvm.org/docs/LibASTMatchersReference.html}}，以发现常见错误。
 
 \item
-为 cppcheck 编写自定义规则\footnote{\url{https://sourceforge.net/projects/cppcheck/files/Articles/}}
+为 cppcheck 编写自定义规则\footnote{\url{https://sourceforge.net/projects/cppcheck/files/Articles/}}。
 
 \item
-编写 CodeQL\footnote{\url{https://codeql.github.com/}} 自定义检查
+编写 CodeQL\footnote{\url{https://codeql.github.com/}} 自定义检查规则。
 \end{itemize}
 
 \begin{myTip}{练习：寻找常见的编码错误}
-与团队成员讨论你在代码库中常见的问题。看看是否能识别出一两个可以通过自定义分析检查发现的常见问题，并使用上述工具之一实现一个检查。
+与团队成员讨论你在代码库中常见的问题。看看是否能识别出一两个，可以通过自定义分析检查发现的常见问题，并使用上述工具实现检查。
 \end{myTip}
 
 \mySubsectionNoFile{18.1}{资源}

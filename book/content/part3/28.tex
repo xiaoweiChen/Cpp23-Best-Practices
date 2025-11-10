@@ -19,7 +19,7 @@ socket(int, int, int);
 域(domain)
 \end{itemize}
 
-这种设计是有问题的，但类似的问题也可能潜藏在我们的代码中。
+这种设计有问题，但类似的问题也可能潜藏在我们的代码中。
 
 \filename{图 13. 定义不佳的构造函数}
 
@@ -29,7 +29,7 @@ Rectangle(int, int, int, int);
 
 这个函数的参数可能是 (x, y, width, height)，也可能是 (x1, y1, x2, y2)。虽然可能性较小，但也可能是 (width, height, x, y)。
 
-您如何看待如下这样的 API 呢？
+如何看待如下这样的 API 呢？
 
 \filename{图 14. 强类型化的构造函数}
 
@@ -37,7 +37,7 @@ Rectangle(int, int, int, int);
 Rectangle(Position, Size);
 \end{cpp}
 
-在许多情况下，只需稍加努力，就可以创建出类型更强的 API。
+许多情况下，只需稍加努力，就可以创建出类型更强的 API。
 
 \filename{图 15. 更强类型的定义}
 
@@ -69,16 +69,16 @@ Rectangle operator+(Rectangle, Position);
 \end{cpp}
 
 \begin{myTip}{}
-在某些情况下，创建结构体甚至可能提升性能，详见 C++ Weekly Ep 119《负成本结构体》\footnote{\url{https://youtu.be/FwsO12x8nyM}}。
+某些情况下，创建结构体甚至可能提升性能，详见 C++ Weekly 第119集《负成本结构体》\footnote{\url{https://youtu.be/FwsO12x8nyM}}。
 \end{myTip}
 
 \mySubsectionNoFile{28.1}{避免使用布尔参数}
 
 本书的一位预发布读者指出，Steve Maguire 在其著作《Writing Solid Code》(编写坚固的代码)第 5 章中提到：“让代码在调用点清晰可读。避免使用布尔参数。”
 
-C++11 中的 enum class 提供了一种简便的方式，可以实现更强的类型检查，避免使用布尔参数，并使您的 API 更难被误用。
+C++11 中的 enum class 提供了一种简便的方式，可以实现更强的类型检查，避免使用布尔参数，并使 API 更难误用。
 
-考虑以下代码：
+来看以下代码：
 
 \filename{图 17. 参数顺序不明确的构造函数}
 
@@ -139,7 +139,7 @@ double high_precision_thing(float) = delete;
 
 \begin{itemize}
 \item
-C++ Weekly Ep 107: “=delete 的威力”\footnote{\url{https://youtu.be/aAvjUU0m6AU}}
+C++ Weekly - 第107集: “=delete 的威力”\footnote{\url{https://youtu.be/aAvjUU0m6AU}}
 
 \item
 Adi Shavit 和 Björn Fahller “关联类型的奇特递归模式”\footnote{\url{https://youtu.be/msi4WNQZyWs}}

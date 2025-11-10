@@ -1,24 +1,24 @@
-您的想象力决定了您能创建的测试的边界。您在调用自己的 API 时，是否尝试过带有恶意的目的？是否会故意向输入传递格式错误的数据？是否会处理来自未知或不可信来源的输入？
+想象力决定了能创建的测试的边界。在调用自己的 API 时，是否尝试过带有恶意的目的？是否会故意向输入传递格式错误的数据？是否会处理来自未知或不可信来源的输入？
 
 要生成所有可能的函数调用、所有可能的输入以及所有可能的组合，这是不可能完成的任务。幸运的是，已有工具可以解决这一问题。
 
 \mySubsectionNoFile{22.1}{模糊测试(Fuzzing)}
 
-模糊测试器会生成各种长度的随机数据流。您编写的测试框架会接收这些数据流，并以适合您应用程序的方式对其进行处理。模糊测试器会分析测试执行过程中生成的代码覆盖率数据，并利用这些信息剔除冗余的测试，同时生成新的、具有新颖性和独特性的测试用例。
+模糊测试器会生成各种长度的随机数据流。编写的测试框架会接收这些数据流，并以适合应用程序的方式对其进行处理。模糊测试器会分析测试执行过程中生成的代码覆盖率数据，并利用这些信息剔除冗余的测试，同时生成新的、具有新颖性和独特性的测试用例。
 
-理论上，如果运行时间足够长，模糊测试最终能够达到被测代码 100\% 的代码覆盖率。结合 AddressSanitizer 使用时，它将成为发现代码缺陷的强大工具。一篇发表于 2015 年的有趣文章\footnote{\url{https://blog.hboeck.de/archives/868-How-Heartbleed-couldve-been-found.html}}指出，若将模糊测试工具与 AddressSanitizer 结合使用，原本可以在不到 6 小时内发现 OpenSSL 中“心脏出血”(heartbleed)的安全漏洞。
+理论上，如果运行时间足够长，模糊测试最终能够达到被测代码 100\% 的代码覆盖率。结合 AddressSanitizer 使用时，将成为发现代码缺陷的强大工具。一篇发表于 2015 年的有趣文章\footnote{\url{https://blog.hboeck.de/archives/868-How-Heartbleed-couldve-been-found.html}}指出，若将模糊测试工具与 AddressSanitizer 结合使用，原本可以在不到 6 小时内发现 OpenSSL 中“心脏出血”(heartbleed)的安全漏洞。
 
 \begin{myNotic}{}
-这个 6 小时的说法如今已严重过时。借助现代模糊测试工具和更先进的计算机，像 heartbleed 这样的漏洞只需几分钟即可被发现。
+这个 6 小时的说法如今已经过时。借助现代模糊测试工具和更先进的计算机，像 heartbleed 这样的漏洞只需几分钟即可发现。
 \end{myNotic}
 
 \begin{myTip}{}
-模糊测试主要用于发现内存安全和安全性方面的缺陷。
+模糊测试主要用于，发现内存安全和安全性方面的缺陷。
 \end{myTip}
 
 目前存在多种不同的模糊测试工具。为便于本节说明，我将重点介绍 LLVM 的 libFuzzer\footnote{\url{https://www.llvm.org/docs/LibFuzzer.html}}。大多数模糊测试工具的基本原理是相同的。
 
-您必须提供某种形式的入口点。该入口点通常是一个如下所示的函数：
+必须提供某种形式的入口点，该入口点通常是一个如下所示的函数：
 
 \filename{图 7. libFuzzer 入口点}
 
@@ -29,7 +29,7 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *Data,
 
 其中，Data 指针始终有效，Size 参数大于或等于 0。
 
-如果您的库主要负责解析输入文件(例如 libpng)，那么您的工作就非常简单：
+如果库主要负责解析输入文件(例如 libpng)，那的工作就非常简单：
 
 \filename{图 8. 使用 libFuzzer 数据}
 
@@ -41,7 +41,7 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *Data,
 }
 \end{cpp}
 
-如果您的函数接收的是数据结构而非输入字符串，那么您的工作会稍微复杂一些，但仍然可行。
+如果函数接收的是数据结构而非输入字符串，那么工作会稍微复杂一些。
 
 \filename{图 9. 高级 libFuzzer 数据用法}
 
@@ -72,7 +72,7 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *Data,
 }
 \end{cpp}
 
-模糊测试器很快就会发现，任何输入数据长度 Size > sizeof(Type1) + sizeof(Type2) 的情况都不会产生新的代码路径，因此它会集中精力生成合适长度的数据。
+模糊测试器很快就会发现，输入数据长度 Size > sizeof(Type1) + sizeof(Type2) 的情况都不会产生新的代码路径，因此它会集中精力生成合适长度的数据。
 
 \begin{myTip}{}
 可以了解一下 Google 在 2022 年推出的新型模糊测试库 FuzzTest\footnote{\url{https://github.com/google/fuzztest}}，该库旨在简化将模糊测试集成到项目中的流程。
@@ -105,28 +105,28 @@ bool greaterThanFive(const int value) {
 }
 \end{cpp}
 
-如果某个变异后的代码仍然能通过所有测试，那么这个未被“杀死”的变异体(survived mutant)可能表明测试本身存在缺陷，或者原代码中存在潜在的 bug。
+如果某个变异后的代码仍然能通过所有测试，那么这个未“杀死”的变异体(survived mutant)可能表明测试本身存在缺陷，或者原代码中存在潜在的 bug。
 
 \begin{myTip}{练习：创建一个模糊测试框架}
-应用本节中的示例，为您的代码创建模糊测试器。您遇到了哪些挑战？
+应用本节中的示例，为代码创建模糊测试器。看看都会遇到哪些挑战？
 \end{myTip}
 
 \begin{myTip}{练习：研究变异测试}
-本书作者没有直接使用过变异测试的经验。它是否适用于您的项目？您能找到哪些有趣的资源？
+本书作者没有直接使用过变异测试的经验。它是否适用于您的项目？能找到哪些有趣的资源？
 \end{myTip}
 
 \begin{myTip}{练习：如果可以，请尝试 FuzzTest}
-FuzzTest 目前仅支持非常新版本的 clang，请查阅当前支持的编译器列表，看看是否可以在您的代码中尝试使用它。
+FuzzTest 目前仅支持非常新版本的 clang，请查阅当前支持的编译器列表，看看是否可以在代码中尝试使用它。
 \end{myTip}
 
 \mySubsectionNoFile{22.3}{资源}
 
 \begin{itemize}
 \item
-C++Now 2018: Marshall Clow “使用模糊测试让您的库更可靠”\footnote{\url{https://youtu.be/LlLJRHToyUk}}
+C++Now 2018: Marshall Clow “使用模糊测试让库更可靠”\footnote{\url{https://youtu.be/LlLJRHToyUk}}
 
 \item
-C++ Weekly Ep 85: 模糊测试\footnote{\url{https://youtu.be/gO0KBoqkOoU}}
+C++ Weekly - 第85集: 模糊测试\footnote{\url{https://youtu.be/gO0KBoqkOoU}}
 
 \item
 CppCast: Alex Denisov “使用 Mull 进行变异测试”\footnote{\url{https://cppcast.com/alex-denisov/}}
@@ -138,22 +138,22 @@ NDC TechTown 2019: Seph De Busser “测试测试：C++ 中的变异测试”\fo
 CppCon 2017: Kostya Serebryany “不模糊测试，就失败……”\footnote{\url{https://youtu.be/k-Cv8Q3zWNQ}}
 
 \item
-CppCon 2020: Barnabás Bágyi “对类接口进行模糊测试以生成和运行 libFuzzer 测试”\footnote{\url{https://cppcon2020.sched.com/event/e7An/fuzzing-class-interfaces-for-generating-and-running-testswith-libfuzzer?iframe=no}} —— 关于以新颖方式使用模糊测试的启发性演讲。该视频目前尚未上传至 YouTube，但本书出版后请留意查找。
+CppCon 2020: Barnabás Bágyi “对类接口进行模糊测试以生成和运行 libFuzzer 测试”\footnote{\url{https://cppcon2020.sched.com/event/e7An/fuzzing-class-interfaces-for-generating-and-running-testswith-libfuzzer?iframe=no}} --- 关于以新颖方式使用模糊测试的启发性演讲。该视频目前尚未上传至 YouTube，但本书出版后请留意查找。
 
 \item
-Autotest\footnote{\url{https://gitlab.com/wilzegers/autotest/}} —— 与“对类接口进行模糊测试以生成和运行 libFuzzer 测试”演讲相关的库。
+Autotest\footnote{\url{https://gitlab.com/wilzegers/autotest/}} --- 与“对类接口进行模糊测试以生成和运行 libFuzzer 测试”演讲相关的库。
 
 \item
-FuzzTest\footnote{\url{https://github.com/google/fuzztest}} —— Google 提供的模糊测试库。
+FuzzTest\footnote{\url{https://github.com/google/fuzztest}} --- Google 提供的模糊测试库。
 
 \item
-DeepState\footnote{\url{https://github.com/trailofbits/deepstate}} —— TrailOfBits 提供的模糊测试工具。
+DeepState\footnote{\url{https://github.com/trailofbits/deepstate}} --- TrailOfBits 提供的模糊测试工具。
 
 \item
-oss-fuzz\footnote{\url{https://github.com/google/oss-fuzz}} —— 针对开源项目的持续模糊测试服务。
+oss-fuzz\footnote{\url{https://github.com/google/oss-fuzz}} --- 针对开源项目的持续模糊测试服务。
 
 \item
-Mutate++\footnote{\url{https://github.com/nlohmann/mutate_cpp}} —— 一个 C++ 变异测试工具。
+Mutate++\footnote{\url{https://github.com/nlohmann/mutate_cpp}} --- 一个 C++ 变异测试工具。
 \end{itemize}
 
 
