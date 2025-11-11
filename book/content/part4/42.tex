@@ -27,7 +27,7 @@ int main()
 }
 \end{cpp}
 
-不幸的是，C++20 的使用场景有些局限，主要机制是格式化为字符串，这往往导致我们写出如下代码：
+不幸的是，C++20 的使用场景有些局限，主要机制是格式化为字符串：
 
 \filename{图57. format 与 cout 的用法}
 
@@ -41,7 +41,7 @@ int main()
 }
 \end{cpp}
 
-为了解决这个问题，C++23 添加了 <print> 头文件，我们可以通过模块来使用它。
+为了解决这个问题，C++23 添加了 <print> 头文件，可以通过模块来使用。
 
 \filename{图58. 使用 std::println}
 
@@ -55,7 +55,7 @@ int main()
 \end{cpp}
 
 \begin{myTip}{}
-std::print 有多个重载版本，以及一个名为 std::println 的辅助函数，它会自动在消息末尾添加换行符。
+std::print 有多个重载版本，以及一个名为 std::println 的辅助函数，会自动在消息末尾添加换行符。
 \end{myTip}
 
 \begin{myWarning}{}
@@ -79,7 +79,7 @@ int main()
 \end{myTip}
 
 \begin{myTip}{练习}
-使用 clang-tidy 的 modernize-use-std-print\footnote{\url{https://clang.llvm.org/extra/clang-tidy/checks/modernize/use-std-print.html}} 检查器来升级你现有的 printf 系列函数。
+使用 clang-tidy 的 modernize-use-std-print\footnote{\url{https://clang.llvm.org/extra/clang-tidy/checks/modernize/use-std-print.html}} 检查器来升级现有的 printf 系列函数。
 \end{myTip}
 
 \begin{myTip}{练习}

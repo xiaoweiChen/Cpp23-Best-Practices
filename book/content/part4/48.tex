@@ -1,10 +1,13 @@
 
-在最佳情况下，C++20 的 ranges 和 views 可以极大地提高代码的可读性和正确性，而不会影响性能或编译时间。
-在最坏的情况下，C++20 的 ranges 和 views 可能会显著增加编译时间、运行时间，并影响代码的可读性。
-由于 ranges 和 views 存在一些潜在的缺点，有些人建议永远不要使用它们。本书并不主张这样做。相反，我们建议你应该学习它们的优点和缺点。
-本书作者认为，“遍历所有元素，但跳过第一个元素”这种简单场景，正是 ranges 和 views 的“杀手级特性”。
+在最佳情况下，C++20 的 range 和 view 可以极大地提高代码的可读性和正确性，而不会影响性能或编译时间。
 
-\filename{图 84. 不使用 ranges 跳过第一个元素。}
+在最坏的情况下，C++20 的 range 和 view 可能会显著增加编译时间、运行时间，并影响代码的可读性。
+
+由于 range 和 view 存在一些潜在的缺点，有些人建议永远不要使用它们。本书并不主张这样做。相反，我们建议你应该学习它们的优点和缺点。
+
+本书作者认为，“遍历所有元素，但跳过第一个元素”这种简单场景，正是 range 和 view 的“杀手级特性”。
+
+\filename{图 84. 不使用 range 跳过第一个元素。}
 \begin{cpp}
 void print_all_but_first(const std::vector<int> &values) {
   // 忘记这个检查，对空容器操作就会导致未定义行为(UB)
@@ -16,7 +19,7 @@ void print_all_but_first(const std::vector<int> &values) {
 }
 \end{cpp}
 
-\filename{图 85. 使用 ranges 跳过第一个元素。}
+\filename{图 85. 使用 range 跳过第一个元素。}
 \begin{cpp}
 void print_all_but_first(const std::vector<int> &values) {
   for (const auto val : values | std::views::drop(1)) {
@@ -25,10 +28,10 @@ void print_all_but_first(const std::vector<int> &values) {
 }
 \end{cpp}
 
-除了 ranges 库那些更复杂、可组合的功能外，请注意这些非常简单但极其强大的用例。
+除了 range 库那些更复杂、可组合的功能外，请注意这些非常简单但极其强大的用例。
 
 \begin{myTip}{练习}
-浏览一下可用的 views 集合：\url{https://en.cppreference.com/w/cpp/ranges}。
+浏览一下可用的 range 集合：\url{https://en.cppreference.com/w/cpp/ranges}。
 \end{myTip}
 
 \begin{myTip}{练习}
@@ -39,19 +42,19 @@ void print_all_but_first(const std::vector<int> &values) {
 
 \begin{itemize}
 \item
-C++ Weekly - Ep 391 - 终于来了！C++23 的 std::views::enumerate\footnote{\url{https://youtu.be/HuRbLPRh-Nk}}
+C++ Weekly - 第391集 - 终于来了！C++23 的 std::views::enumerate\footnote{\url{https://youtu.be/HuRbLPRh-Nk}}
 
 \item
-C++ Weekly - Ep 398 - C++23 的 zip\_view\footnote{\url{https://youtu.be/MVXGdwREo_E}}
+C++ Weekly - 第398集 - C++23 的 zip\_view\footnote{\url{https://youtu.be/MVXGdwREo_E}}
 
 \item
-C++ Weekly - Ep 399 - C++23 的 slide\_view 与 adjacent\_view\footnote{\url{hhttps://youtu.be/czmGjH16Hb0}}
+C++ Weekly - 第399集 - C++23 的 slide\_view 与 adjacent\_view\footnote{\url{hhttps://youtu.be/czmGjH16Hb0}}
 
 \item
-C++ Weekly - Ep 401 - C++23 的 chunk view 和 stride view\footnote{\url{https://youtu.be/3ZeV-F1Rbaw}}
+C++ Weekly - 第401集 - C++23 的 chunk view 和 stride view\footnote{\url{https://youtu.be/3ZeV-F1Rbaw}}
 
 \item
-Effective Ranges: 使用 C++2x Range 的教程  - Jeff Garland - CppCon 2023\footnote{\url{https://youtu.be/QoaVRQvA6hI}}
+Effective Ranges: C++2x的Range教程  - Jeff Garland - CppCon 2023\footnote{\url{https://youtu.be/QoaVRQvA6hI}}
 \end{itemize}
 
 

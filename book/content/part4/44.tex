@@ -3,23 +3,23 @@
 警惕全局状态！
 
 \item
-忘记头文件的存在吧！
+忘记头文件吧！
 \end{enumerate}
 
 \begin{myTip}{}
 所有全局数据都应该是 constexpr
 \end{myTip}
 
-但全局的 constexpr 值是完全安全的。它们无法被修改，也不会造成“超距作用”。
+但全局的 constexpr 值完全安全。它们无法修改，也不会造成“超距作用”。
 
-如果你仍然在使用头文件，因为你还没有完全迁移到模块……
+如果仍然在使用头文件，因为还没有完全迁移到模块……
 
 \begin{myTip}
 所有全局的 constexpr 值都应该是 inline constexpr
 \end{myTip}
 
 \begin{myNotic}
-在模块接口内部，constexpr 全局变量和 inline constexpr 全局变量都具有“外部链接”(external linkage)，因此我们不必为此担心。
+在模块接口内部，constexpr 全局变量和 inline constexpr 全局变量都具有“外部链接”(external linkage)，因此不必为此担心。
 \end{myNotic}
 
 \filename{图62. static constexpr 示例}

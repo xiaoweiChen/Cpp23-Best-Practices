@@ -1,6 +1,6 @@
-算法能够传达意图，并帮助我们践行“尽可能使用 const”(const All The Things)的原则。在 C++20 中，我们拥有了 ranges，这让算法的使用变得更加便捷。通过采用函数式编程的思路并使用算法，我们甚至可以写出读起来像自然语言句子一样的 C++ 代码。
+算法能够传达意图，并帮助我们践行“尽可能使用 const”(const All The Things)的原则。在 C++20 中，我们拥有了 range，这让算法的使用变得更加便捷。通过采用函数式编程的思路并使用算法，甚至可以写出读起来像自然语言句子一样的 C++ 代码。
 
-\filename{图 91. 使用 ranges 的算法}
+\filename{图 91. 使用 range 的算法}
 \begin{cpp}
 const auto has_value
   = std::any_of(container, greater_than(12));
@@ -13,14 +13,14 @@ const auto has_value
                 greater_than(12));
 \end{cpp}
 
-注意，在一些罕见情况下\footnote{\url{https://sourceforge.net/p/cppcheck/wiki/ListOfChecks/}}，你的静态分析工具可能会建议你使用某个特定的算法。
+注意，在一些罕见情况下\footnote{\url{https://sourceforge.net/p/cppcheck/wiki/ListOfChecks/}}，静态分析工具可能会建议使用某个特定的算法。
 
 \begin{myTip}{练习：研究现有的循环}
 下次当你在代码库中阅读一个循环时，将其与 C++ 的 <algorithm> 头文件\footnote{\url{https://en.cppreference.com/w/cpp/algorithm}} 进行对照，尝试找出是否有更合适的算法可以替代它。
 \end{myTip}
 
 \begin{myNotic}{}
-本书只是简单提及了 C++20 的 ranges。在本书出版时，编译器才刚刚开始支持 ranges。ranges 可以组合使用，并且完全支持 constexpr。
+本书只是简单提及了 C++20 的 range。在本书出版时，编译器才刚刚开始支持 range。range 可以组合使用，并且完全支持 constexpr。
 \end{myNotic}
 
 \mySubsectionNoFile{50.1}{资源}

@@ -3,13 +3,13 @@
 
 用最简单的术语来说：
 
-\filename{图36. 好的想法，使用栈且可被优化}
+\filename{图36. 好的想法，使用栈且可优化}
 
 \begin{cpp}
 std::string make_string() { return "Hello World"; }
 \end{cpp}
 
-\filename{图37. 糟糕的想法，使用了堆。}
+\filename{图37. 糟糕的想法，使用了堆}
 
 \begin{cpp}
 std::unique_ptr<std::string> make_string() {
@@ -17,7 +17,7 @@ std::unique_ptr<std::string> make_string() {
 }
 \end{cpp}
 
-\filename{图38. 好的想法。}
+\filename{图38. 好的想法}
 
 \begin{cpp}
 void use_string() {
@@ -26,7 +26,7 @@ void use_string() {
 }
 \end{cpp}
 
-\filename{图39. 非常糟糕的想法，使用了堆并且会泄漏内存。}
+\filename{图39. 非常糟糕的想法，使用了堆并且会泄漏内存}
 
 \begin{cpp}
 void use_string() {
@@ -36,24 +36,24 @@ void use_string() {
 \end{cpp}
 
 \begin{myNotic}{}
-注意，std::string 本身可能会在内部进行分配，从而使用堆。如果你的目标是完全不使用堆，那么你需要采取其他措施。我们的目标是避免不必要的堆分配。
+注意，std::string 本身可能会在内部进行分配，从而使用堆。如果目标是完全不使用堆，那么需要采取其他措施。我们的目标是避免不必要的堆分配。
 \end{myNotic}
 
 一般来说，使用 new 表达式(或通过 make\_unique 或 make\_shared)创建的对象是堆对象，具有动态存储期。在局部作用域内创建的对象是栈对象，具有自动存储期。编译器和工具通常更容易发现对未初始化的栈值的读取，而非堆值。
 
 \begin{myTip}{练习：查找堆的使用}
-一些具有 C 和 Java 背景的开发者可能很难理解这一点。对于 Java 来说，是因为创建对象需要使用 new。对于 C 语言来说，是因为 C 编译器无法像 C++ 编译器那样执行相同类型的优化，这是由语言差异造成的。因此，你当前的代码中可能就存在一些不必要的堆使用情况。
+一些具有 C 和 Java 背景的开发者可能很难理解这一点。对于 Java 来说，因为创建对象需要使用 new。对于 C 语言来说，因为 C 编译器无法像 C++ 编译器那样执行相同类型的优化。因此，当前的代码中可能就存在一些不必要的堆使用。
 \end{myTip}
 
 \begin{myTip}{练习：运行堆分析器}
-有多种堆分析工具，甚至你的 IDE 中可能就内置了一个。检查你的堆使用情况，寻找项目中对堆的潜在滥用。很可能你大部分的堆分配都来自于对 std::string 或 std::vector 等容器的意外拷贝。
+有多种堆分析工具，甚至 IDE 中可能就内置了一个。检查堆使用情况，寻找项目中对堆的潜在滥用。很可能大部分的堆分配都来自于对 std::string 或 std::vector 等容器的复制。
 \end{myTip}
 
 \mySubsectionNoFile{32.1}{资源}
 
 \begin{itemize}
 \item
-Code::Dive 2018: Björn Fahller “What Do You Mean By Cache Friendly?”\footnote{\url{https://youtu.be/Fzbotzi1gYs}}
+Code::Dive 2018: Björn Fahller “缓存友好是什么意思？”\footnote{\url{https://youtu.be/Fzbotzi1gYs}}
 
 \item
 heaptrack - 一个用于 Linux 的堆内存分析器\footnote{\url{https://github.com/KDAB/heaptrack}}

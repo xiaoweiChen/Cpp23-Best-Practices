@@ -1,8 +1,8 @@
-如果你因为 std::unique\_ptr 不适用于你的使用场景而提供了析构函数，那么你必须对其他特殊成员函数进行 =delete、=default 或手动实现。
+如果因为 std::unique\_ptr 不适用于使用场景而提供了析构函数，那么必须对其他特殊成员函数进行 =delete、=default 或手动实现。
 
-这个规则最初被称为“三规则”，在 C++11 之后被称为“五规则”。
+这个规则最初称为“三规则”，在 C++11 之后称为“五规则”。
 
-\filename{图54. 特殊成员函数。}
+\filename{图54. 特殊成员函数}
 
 \begin{cpp}
 struct S {
@@ -19,12 +19,12 @@ struct S {
 \end{cpp}
 
 \begin{myTip}{}
-如果你不知道如何处理这些特殊成员函数，使用 =delete 是一种安全的方式！
+如果不知道如何处理这些特殊成员函数，使用 =delete 是一种安全的方式！
 \end{myTip}
 
-当你声明带有虚函数的基类时，也应该遵循“五规则”。
+当声明带有虚函数的基类时，也应该遵循“五规则”。
 
-\filename{图55. 多态类型中的五规则。}
+\filename{图55. 多态类型中的五规则}
 
 \begin{cpp}
 struct Base {
@@ -53,17 +53,17 @@ struct Derived : Base {
 \end{cpp}
 
 \begin{myNotic}{}
-除了使用 = delete，你也可以考虑将这些特殊成员函数设为 protected。
+除了使用 = delete，也可以考虑将这些特殊成员函数设为 protected。
 \end{myNotic}
 
-\begin{myTip}{练习：实现你自己的 unique\_ptr<> 模板}
+\begin{myTip}{练习：实现自己的 unique\_ptr<> 模板}
 要完全做对是很困难的。编写测试用例。理解为什么默认生成的特殊成员函数无法正常工作。
 
-额外加分：使用 C++20 的 constexpr 动态分配支持来实现它。
+额外加分：使用 C++20 的 constexpr 动态分配支持来实现。
 \end{myTip}
 
-\begin{myTip}{练习：在你的代码中查找违反“五规则”的情况}
-当你定义特殊成员函数时，很可能没有在现有代码中提供一致的生命周期语义。为了评估其影响，你可以快速地将任何缺失的特殊成员函数声明为 = delete;，然后看看哪些地方会出错。
+\begin{myTip}{练习：在代码中查找违反“五规则”的情况}
+当定义特殊成员函数时，很可能没有在现有代码中提供一致的生命周期语义。为了评估其影响，可以快速地将缺失的特殊成员函数声明为 = delete;，然后看看哪些地方会出错。
 \end{myTip}
 
 \mySubsectionNoFile{40.1}{资源}

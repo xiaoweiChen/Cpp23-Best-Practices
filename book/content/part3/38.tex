@@ -1,4 +1,4 @@
-C++20 可以为你自动生成任意比较运算符(由于其形状，俗称“太空飞船运算符”)。
+C++20 可以自动生成任意比较运算符(由于其形状，也称为“太空飞船运算符”)。
 
 \begin{itemize}
 \item
@@ -8,7 +8,7 @@ C++20 可以为你自动生成任意比较运算符(由于其形状，俗称“�
 如果你定义了 <=>，编译器将生成所有其他比较运算符(但 == 和 != 除外)
 
 \item
-你可以显式地将任何比较操作声明为 default
+可以显式地将比较操作声明为 default
 \end{itemize}
 
 \filename{图49. 基本的太空飞船运算符示例}
@@ -25,19 +25,21 @@ struct MyData
 \end{cpp}
 
 C++ 标准库已开始弃用显式的比较操作，可查阅其示例。
+
 请注意，为了性能考虑，std::string 实现了自定义的 operator==(提供 == 和 !=)和 operator<=>(提供其余比较)。
+
 \url{https://en.cppreference.com/w/cpp/string/basic_string/operator_cmp}
 
 \begin{myNotic}
-如果你为你的类型提供了自定义的 operator<=>，编译器将不再为你提供 operator== 或 operator!=！这与特殊成员函数的“零规则”和“五规则”类似。
+如果为类型提供了自定义的 operator<=>，编译器将不再为你提供 operator== 或 operator!=！这与特殊成员函数的“零规则”和“五规则”类似。
 \end{myNotic}
 
 \begin{itemize}
 \item
-如果你提供了自定义的 operator<=>，则必须自己提供 operator==
+如果提供了自定义的 operator<=>，则必须自己提供 operator==
 
 \item
-如果你需要自定义的 operator<=>，那么显式默认的 operator== 很可能无法正确工作
+如果需要自定义的 operator<=>，那么显式默认的 operator== 很可能无法正确工作
 \end{itemize}
 
 \begin{myTip}{练习：实现一个太空飞船运算符}

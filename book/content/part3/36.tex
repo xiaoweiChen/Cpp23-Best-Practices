@@ -1,7 +1,7 @@
 
 与 SFINAE 相比，概念将最终带来更好的错误信息、更短的编译时间，以及远胜于 SFINAE 的代码可读性。如果我们继续以 divide 函数为例，可以回顾之前“优先使用 if constexpr 而非 SFINAE”一章中的 if constexpr 版本。
 
-\filename{图44. ‘divide‘ 函数的 ‘if constexpr‘ 版本。}
+\filename{图44. 'divide' 函数的 'if constexpr' 版本}
 
 \begin{cpp}
 import std;
@@ -21,9 +21,9 @@ nominator) {
 }
 \end{cpp}
 
-我们可以使用概念将其拆分为两个不同的函数。概念可以在多种不同上下文中使用。此版本在函数声明后使用了简单的 requires 子句。
+可以使用概念将其拆分为两个不同的函数。概念可以在多种不同上下文中使用。此版本在函数声明后使用了简单的 requires 子句。
 
-\filename{图45. 在 ‘requires‘ 子句中使用概念。}
+\filename{图45. 在 'requires' 子句中使用概念}
 
 \begin{cpp}
 import std;
@@ -50,7 +50,7 @@ nominator) {
 
 此版本将概念用作函数参数。C++20 甚至提供了“auto 概念”，这是一种隐式的模板函数。
 
-\filename{图46. 简洁的概念要求语法。}
+\filename{图46. 简洁的概念要求语法}
 
 \begin{cpp}
 import std;
@@ -75,7 +75,7 @@ std::integral auto denominator) {
 \end{myNotic}
 
 \begin{myTip}{练习：了解 C++20 提供了哪些概念。}
-像往常一样，cppreference 通过提供概念列表来帮助你\footnote{\url{https://en.cppreference.com/w/cpp/concepts}}。
+像往常一样，cppreference 会通过提供概念列表来帮助你\footnote{\url{https://en.cppreference.com/w/cpp/concepts}}。
 \end{myTip}
 
 \begin{myTip}{练习：创建你自己的概念。}

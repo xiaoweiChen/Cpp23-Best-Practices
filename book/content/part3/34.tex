@@ -1,11 +1,11 @@
 
-优先按以下顺序选择你的容器：
+优先按以下顺序选择容器：
 
 \begin{itemize}
 \item
 std::array<>
 
-一种固定大小、基于栈的连续容器。数据大小必须在编译时已知，并且你必须有足够的栈空间来容纳数据。这种容器有助于我们优先使用栈而非堆。由于其位置已知且内存连续，std::array<> 成为了一种“零开销抽象”。编译器可以执行额外的一系列优化，因为它知道数据的大小和位置。
+一种固定大小、基于栈的连续容器。数据大小必须在编译时已知，并且必须有足够的栈空间来容纳数据。这种容器有助于我们优先使用栈而非堆。由于其位置已知且内存连续，std::array<> 成为了一种“零开销抽象”。编译器可以执行一系列优化，因为它知道数据的大小和位置。
 
 \item
 std::vector<>
@@ -13,14 +13,14 @@ std::vector<>
 一种动态大小、基于堆的连续容器。虽然编译器不知道数据最终会存放在哪里，但它知道元素在内存中是彼此相邻排列的。这种连续性为编译器提供了更多的优化机会，并且对缓存更友好。
 \end{itemize}
 
-几乎其他任何容器的使用都需要添加注释并说明原因。对于小型容器，使用带线性搜索的扁平化映射(flat map)很可能比 std::map 更好。
+几乎任何容器的使用都需要添加注释并说明原因。对于小型容器，使用带线性搜索的扁平化映射(flat map)很可能比 std::map 更好。
 
 但不要对此过于狂热。如果你确实需要键值查找，请使用 std::map，然后评估它是否具有你想要的性能和特性。
 
 \begin{myTip}{练习：用 array 替换 vector}
 寻找固定大小的 vector，并尽可能将其替换为 array。借助 C++17 的类模板参数推导(Class Template Argument Deduction)，这可以变得更加容易。
 
-\filename{图41. 用于固定大小数据的 ‘const std::vector‘。}
+\filename{图41. 用于固定大小数据的 'const std::vector'}
 
 \begin{cpp}
 const std::vector<int> data{n+1, n+2, n+3, n+4};
@@ -28,7 +28,7 @@ const std::vector<int> data{n+1, n+2, n+3, n+4};
 
 可以变为
 
-\filename{图42. 用于固定大小数据的 ‘const std::array‘。}
+\filename{图42. 用于固定大小数据的 'const std::array'}
 
 \begin{cpp}
 const std::array<int, 4> data{n+1, n+2, n+3, n+4}; // C++11
@@ -42,7 +42,7 @@ const std::array data{n+1, n+2, n+3, n+4}; // C++17
 
 \begin{itemize}
 \item
- Bjarne Stroustrup “Are lists evil?”\footnote{\url{https://www.stroustrup.com/bs_faq.html\#list}}
+ Bjarne Stroustrup “列表是邪恶的吗？”\footnote{\url{https://www.stroustrup.com/bs_faq.html\#list}}
 \end{itemize}
 
 

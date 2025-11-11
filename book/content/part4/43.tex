@@ -1,47 +1,48 @@
 \begin{myNotic}{}
-我比以往任何时候都更强烈地主张使用 constexpr！
+我比以往任何时候都更强烈地推荐使用 constexpr！
 \end{myNotic}
 
-C++23 和模块(modules)结合在一起，几乎消除了所有不使用 constexpr 的理由。
-现在，在你的模块接口文件中将函数声明为 constexpr 应该成为你的默认选择。
+C++23 和模块(module)结合在一起，几乎消除了所有不使用 constexpr 的理由。
+
+现在，在你的模块接口文件中将函数声明为 constexpr 应该成为默认选择。
 
 \begin{itemize}
 \item
 有了模块，真正实现了“只为所用付费”(对模块使用者的成本几乎为零)
 
 \item
-constexpr 启用了你未曾考虑过的编译时计算用例
+constexpr 启用了未曾考虑过的编译时计算用例
 
 \item
 一个强大的技术是尽可能在编译时完成计算，然后从一个已知的点继续运行时计算
 
 \item
-只有当我们的核心库支持 constexpr 时，这些技术才有可能实现。
+只有当核心库支持 constexpr 时，这些技术才有可能实现。
 \end{itemize}
 
 使用 \#define 的时代已经一去不复返了。constexpr 应该成为你的新默认选择！不幸的是，人们常常把 constexpr 想得过于复杂，让我们来分解一下最简单的情况。
 
 \begin{myWarning}{}
-你需要 C++26 才能从标准库中获得 constexpr 版本的三角函数。
+需要 C++26 才能从标准库中获得 constexpr 版本的三角函数。
 \end{myWarning}
 
-如果你看到像这样的代码(我在真实代码中见过)：
+如果看到像这样的代码(我在真实代码中见过)：
 
-\filename{图60. 在编译时已知的 ‘static const’ 数据。}
+\filename{图60. 在编译时已知的 'static const'数据}
 \begin{cpp}
 static const std::vector<int> angles{-90,-45,0,45,90};
 \end{cpp}
 
 这真的应该改成：
 
-\filename{图61. 将 ‘static const’ 改为 ‘static constexpr’}
+\filename{图61. 将 'static const' 改为 'static constexpr'}
 
 \begin{cpp}
 static constexpr std::array angles{-90,-45,0,45,90};
 \end{cpp}
 
 \begin{myNotic}{}
-这里的 static constexpr 是必要的，以确保对象不会在每次遇到该函数/声明时被重新初始化。static 保证了变量的生命周期与程序相同，并且我们知道它只会被初始化一次。
+这里的 static constexpr 是必要的，以确保对象不会在每次遇到该函数/声明时重新初始化。static 保证了变量的生命周期与程序相同，并且我们知道它只会初始化一次。
 \end{myNotic}
 
 这两者的区别体现在三个方面。
@@ -51,37 +52,38 @@ static constexpr std::array angles{-90,-45,0,45,90};
 数组的大小现在在编译时就已知
 
 \item
-我们移除了动态内存分配
+移除了动态内存分配
 
 \item
-我们不再需要支付访问静态变量的开销
+不再需要支付访问静态变量的开销
 \end{itemize}
 
 \begin{myTip}{}
-对于头文件中的全局变量，优先使用 inline constexpr 而不是 static constexpr，这样链接器可以合并数据结构，减少代码膨胀。
+对于头文件中的全局变量，优先使用 inline constexpr 而非 static constexpr，这样链接器可以合并数据结构，减少代码膨胀。
 \end{myTip}
 
-主要收益来自前两点，但我们需要具备 constexpr 的思维才能发现这类机会。我们也需要 constexpr 的知识来了解如何在更复杂的情况下应用它。
-这种差异可能是巨大的。
+主要收益来自前两点，但需要具备 constexpr 的思维才能发现这类机会。也需要 constexpr 的知识来了解，如何在更复杂的情况下对其进行应用。
+
+这种差异可能巨大。
 
 \begin{myNotic}{}
-有时，非静态的 constexpr 局部变量可能是最高效的选项，因为数据存在于栈上，而不是二进制文件的其他段中。在你的优化过程中，请检查这是否重要。
+有时，非静态的 constexpr 局部变量可能是最高效的选项，因为数据存在于栈上，而不是二进制文件的其他段中。在优化过程中，请确定这是否重要。
 \end{myNotic}
 
 \begin{myNotic}{}
-从技术上讲，非静态的 constexpr 变量不一定在编译时计算。然而，它们几乎肯定是在编译时计算的，将其视为在编译时计算是很方便的。
+从技术上讲，非静态的 constexpr 变量不一定在编译时计算。然而，它们肯定是在编译时计算的，将其视为在编译时计算是很方便的。
 \end{myNotic}
 
 \begin{myTip}{练习：将你的 const 值改为 constexpr}
 在阅读代码时，查看所有的 const 值。问自己：“这个值在编译时是已知的吗？” 如果是，要怎么做才能让它变成 constexpr？
 \end{myTip}
 
-\begin{myTip}{练习：将你的 static const 值改为 static constexpr}
+\begin{myTip}{练习：将 static const 值改为 static constexpr}
 浏览你当前的代码库，寻找目前是 static const 的代码。你很可能在某个地方有这种代码。
 
 \begin{itemize}
 \item
-如果它现在是 static const，那么它的大小和数据很可能在编译时就是已知的。
+如果现在是 static const，那么其大小和数据很可能在编译时就已知。
 
 \item
 这段代码能变成 constexpr 吗？
@@ -93,12 +95,12 @@ static constexpr std::array angles{-90,-45,0,45,90};
 修改填充这些 static const 数据的函数，让它们也变成 constexpr，需要多少工作量？
 
 \item
-记住，如果它是头文件中的全局变量，你应该优先使用 inline constexpr。
+记住，如果是头文件中的全局变量，应该优先使用 inline constexpr。
 \end{itemize}
 \end{myTip}
 
 \begin{myTip}{练习：让头文件中的代码支持 constexpr}
-如果你有已经在头文件中定义的函数和类型，尝试让这些函数和类型完全支持 constexpr。
+如果有已经在头文件中定义的函数和类型，尝试让这些函数和类型完全支持 constexpr。
 \end{myTip}
 
 \begin{myTip}{练习：将头文件中定义的 constexpr 函数移到模块接口文件中}
@@ -106,11 +108,11 @@ static constexpr std::array angles{-90,-45,0,45,90};
 \end{myTip}
 
 \begin{myTip}{练习：寻找更多可以改为 constexpr 的非 IO 函数}
-在你掌握这项技能的过程中，基本上任何非 IO 函数都可以被改造成 constexpr 函数。
+在掌握这项技能的过程中，基本上非 IO 函数都可以改造成 constexpr 函数。
 
 \begin{itemize}
 \item
-将这些函数移到你的模块接口文件中。
+将这些函数移到模块接口文件中。
 
 \item
 将这些函数声明为 constexpr。
@@ -121,13 +123,13 @@ static constexpr std::array angles{-90,-45,0,45,90};
 
 \begin{itemize}
 \item
-C++Now 2017: Ben Deane \& Jason Turner “constexpr ALL the things”\footnote{\url{https://youtu.be/HMB9oXFobJc}}(关于现代 constexpr 技术略显过时)
+C++Now 2017: Ben Deane \& Jason Turner “把所有东西都声明为 constexpr！”\footnote{\url{https://youtu.be/HMB9oXFobJc}}(关于现代 constexpr 技术略显过时)
 
 \item
 C++ Weekly 第233集: constexpr map vs std::map \footnote{\url{https://youtu.be/INn3xa4pMfg}}
 
 \item
-Meeting C++ 2017: Jason Turner “Practical constexpr” \footnote{\url{https://youtu.be/xtf9qkDTrZE}}
+Meeting C++ 2017: Jason Turner “实用的 constexpr” \footnote{\url{https://youtu.be/xtf9qkDTrZE}}
 
 \item
 C++ Russia 2019: Hana Dusíková “编译时常量正则表达式的现状”\footnote{\url{https://youtu.be/r_ZASJFQGQI}}
@@ -142,7 +144,7 @@ C++ Weekly: constexpr vs static constexpr \footnote{\url{https://youtu.be/IDQ0ng
 C++ Weekly: static constexpr vs inline constexpr \footnote{\url{https://youtu.be/QVHwOOrSh3w}}
 
 \item
-cons\_expr: 一个能够在编译时运行的类似 Scheme 的脚本语言 \footnote{\url{https://github.com/lefticus/cons\_expr}}
+cons\_expr: 一个能够在编译时运行的(类似 Scheme)脚本语言 \footnote{\url{https://github.com/lefticus/cons\_expr}}
 \end{itemize}
 
 

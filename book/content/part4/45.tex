@@ -2,15 +2,15 @@
 
 \begin{enumerate}
 \item
-它迫使我们思考对象的初始化和生命周期，而这会影响性能。
+思考对象的初始化和生命周期，而这会影响性能。
 
 \item
-向我们代码的阅读者传达了明确的语义。
+向代码的阅读者传达了明确的语义。
 \end{enumerate}
 
 顺便提一下，如果是一个静态对象，编译器现在可以自由地将其移至二进制文件的常量区域，这可能会影响优化器的行为。
 
-\begin{myTip}{练习：寻找使用 const 的机会。}
+\begin{myTip}{练习：寻找使用 const 的机会}
 当你浏览代码时，应寻找那些未声明为 const 的变量，并将它们改为 const。
 \end{myTip}
 
@@ -19,7 +19,7 @@
 如果一个变量不是 const，请思考为什么不是？
 
 \item
-使用 lambda 表达式或添加一个具名函数是否能让该值变为 const？
+使用 lambda 表达式或添加一个具名函数，是否能让该值变为 const？
 \end{itemize}
 
 \begin{cpp}
@@ -31,16 +31,16 @@ const auto data = [](){ // no parameters
 \end{cpp}
 
 \begin{myTip}{}
-由于返回值优化(RVO)，使用 lambda 通常不会增加任何开销，甚至可能提升性能。
+由于返回值优化(RVO)，使用 lambda 通常不会增加开销，甚至可能提升性能。
 \end{myTip}
 
-在这一过程中，你是否将一些 static 变量改为了 const？如果是，请继续进行 constexpr 相关的练习。
+这一过程中，是否将一些 static 变量改为了 const？如果是，请继续进行 constexpr 相关的练习。
 
 \begin{myWarning}{}
 对于将要返回的值，使用 const 在某些情况下可能会破坏隐式移动(implicit moves)！
 \end{myWarning}
 
-然而，需要注意的是，总体而言，依赖返回值的隐式移动和 RVO 可能会有些脆弱。最好的做法是干脆不要给要返回的对象命名。
+总体而言，依赖返回值的隐式移动和 RVO 可能会有些脆弱。最好的做法是干脆不要给要返回的对象命名。
 
 \begin{cpp}
 ReturnType some_function(int value)
@@ -66,7 +66,7 @@ ReturnType some_function(int value)
 \end{cpp}
 
 \begin{myNotic}{}
-Clang-tidy 的 No Automatic Move\footnote{\url{https://clang.llvm.org/extra//clang-tidy/checks/performance-no-automatic-move.html}} 分析功能在很大程度上是有缺陷的。它在 NRVO 拷贝省略适用时仍会发出警告，而在真正重要的地方却不会警告！(截至 2022 年 2 月 23 日)。参见此分析：\url{https://compiler-explorer.com/z/a4K76nbhq}。
+Clang-tidy 的 No Automatic Move\footnote{\url{https://clang.llvm.org/extra//clang-tidy/checks/performance-no-automatic-move.html}} 分析功能在很大程度上有缺陷。它在 NRVO 拷贝省略适用时仍会发出警告，而在真正重要的地方却不会警告！(截至 2022 年 2 月 23 日)。参见此分析：\url{https://compiler-explorer.com/z/a4K76nbhq}。
 \end{myNotic}
 
 \begin{myWarning}{}
